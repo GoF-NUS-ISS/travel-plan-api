@@ -43,6 +43,7 @@ Create 3 MySQL databases on your local machine With same instructions to create 
         select the microservicecloud folder, choose "Run as maven clean" and "Run as maven install" 
         then find the jar file within each target folder of module
         open CMD console, and type "java -jar XXXX" , XXXX refers to the location of each jar
+        (without using Tomcat/jetty container, which is already integrated into jar already)
  
  
  ====================Appendix===========================
