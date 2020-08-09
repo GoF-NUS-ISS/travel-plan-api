@@ -45,7 +45,7 @@ Create 3 MySQL databases on your local machine With same instructions to create 
         open CMD console, and type "java -jar XXXX" , XXXX refers to the location of each jar
  
  
- ================================================Appendix===========================
+ ====================Appendix===========================
  
       create database cloudDB01;
       create database cloudDB02;
