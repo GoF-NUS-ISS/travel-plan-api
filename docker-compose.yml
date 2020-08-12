@@ -1,0 +1,8 @@
+version: "3"
+services:
+  travel-plan-database:
+    image: mongo:4.0
+    container_name: travel-plan-database
+    ports:
+      - 27017:27017
+    command: --smallfiles
