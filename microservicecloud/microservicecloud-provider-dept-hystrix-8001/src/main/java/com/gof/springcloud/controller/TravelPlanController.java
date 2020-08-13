@@ -1,22 +1,24 @@
 package com.gof.springcloud.controller;
 
+import com.gof.springcloud.model.TravelPlanModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.gof.springcloud.entities.Dept;
-import com.gof.springcloud.service.DeptService;
+import com.gof.springcloud.service.TravelPlanService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import java.util.List;
+
 @RestController
-public class DeptController
+public class TravelPlanController
 {
 	@Autowired
-	private DeptService service = null;
+	private final TravelPlanService service = null;
 
-	@RequestMapping(value = "/dept/get/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/dept/get/{id}", method = RequestMethod.GET)
 	// once find failure of invoking and cast of exception,
 	// will call specific method within fallbackMethod automatically,
 	// which is labeled by HystrixCommand
@@ -39,5 +41,16 @@ public class DeptController
 		result.setDeptno(id);
 		result.setDb_source("no this database in MySQL");
 		return result;
+	}*/
+
+	@PostMapping("/travelPlan")
+	public ResponseEntity addPlan(){
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
+
+	@GetMapping("/getPlans")
+	public List<TravelPlanModel> getAll(){
+		return service.getAll();
+	}
+
 }

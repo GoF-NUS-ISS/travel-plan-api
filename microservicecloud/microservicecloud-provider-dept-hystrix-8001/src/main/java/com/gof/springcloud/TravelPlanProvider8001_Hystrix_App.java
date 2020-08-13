@@ -10,10 +10,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient //Register into eureka after initiation
 @EnableDiscoveryClient
 @EnableCircuitBreaker //import hystrix for fusing mechanism
-public class DeptProvider8001_Hystrix_App
+public class TravelPlanProvider8001_Hystrix_App
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(DeptProvider8001_Hystrix_App.class, args);
+		SpringApplication.run(TravelPlanProvider8001_Hystrix_App.class, args);
 	}
 }
