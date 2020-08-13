@@ -6,3 +6,5 @@ services:
     ports:
       - 27017:27017
     command: --smallfiles
+    volumes:
+      - /opt/mongodb:/data/db
