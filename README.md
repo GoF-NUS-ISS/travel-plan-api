@@ -1,6 +1,8 @@
 # travel-plan-api
 For developing scaffold
 
+NOTE: For microservicecloud-provider-dept-hystrix-8001 project, run 'docker-compse up -d' to bring up mongo instance. It will be accessible by localhost.
+
 1-Preparation:
 Create 3 MySQL databases on your local machine With same instructions to create table, and then insert the data(referring to Appendix in the last part)
  
