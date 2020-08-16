@@ -47,6 +47,9 @@ Create 3 MySQL databases on your local machine With same instructions to create 
         open CMD console, and type "java -jar XXXX" , XXXX refers to the location of each jar
         (without using Tomcat/jetty container, which is already integrated into jar already)
  
+ 5-Open the API document
+   http://localhost:8001/swagger-ui.html#
+   localhost can be replaced with other IP address.
  
  ====================Appendix===========================
  
