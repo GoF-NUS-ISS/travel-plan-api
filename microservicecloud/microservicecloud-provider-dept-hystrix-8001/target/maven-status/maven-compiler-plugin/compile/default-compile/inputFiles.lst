@@ -1,5 +1,8 @@
-D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\service\impl\DeptServiceImpl.java
-D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\DeptProvider8001_Hystrix_App.java
-D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\service\DeptService.java
-D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\dao\DeptDao.java
-D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\controller\DeptController.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\service\TravelPlanService.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\controller\TravelPlanController.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\repository\TravelPlanRepository.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\config\SwaggerConfig.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\service\impl\TravelPlanServiceImpl.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\TravelPlanProvider8001_Hystrix_App.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\model\TravelPlanModel.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\dao\TravelPlanDao.java

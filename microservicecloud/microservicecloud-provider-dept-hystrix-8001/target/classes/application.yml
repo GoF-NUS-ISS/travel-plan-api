@@ -5,10 +5,18 @@ mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml
   type-aliases-package: com.gof.springcloud.entities
   mapper-locations: classpath:mybatis/mapper/*.xml
-    
+
+logging:
+  file:
+    name: ./log/travel-plan-api.log
+
 spring:
    application:
-    name: microservicecloud-dept
+    name: microservicecloud-travel-plan
+   data:
+     mongodb:
+       uri: mongodb://localhost:27017
+       database: travelplan
    datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -20,7 +28,7 @@ spring:
       initial-size: 5
       max-total: 5
       max-wait-millis: 200
-      
+ 
 eureka:
   client: #client register into eureka
     service-url: 

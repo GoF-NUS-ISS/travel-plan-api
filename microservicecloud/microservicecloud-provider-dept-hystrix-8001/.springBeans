@@ -7,7 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.gof.springcloud.DeptProvider8001_Hystrix_App</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

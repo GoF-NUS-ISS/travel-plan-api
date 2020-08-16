@@ -1,56 +1,40 @@
 package com.gof.springcloud.controller;
 
-import com.gof.springcloud.model.TravelPlanModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import com.gof.springcloud.entities.Dept;
-import com.gof.springcloud.service.TravelPlanService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gof.springcloud.entities.interaction.AjaxResponse;
+import com.gof.springcloud.model.TravelPlanModel;
+import com.gof.springcloud.service.TravelPlanService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
+@Api("Travel Plan API")
 public class TravelPlanController
 {
 	@Autowired
-	private final TravelPlanService service = null;
-
-	/*@RequestMapping(value = "/dept/get/{id}", method = RequestMethod.GET)
-	// once find failure of invoking and cast of exception,
-	// will call specific method within fallbackMethod automatically,
-	// which is labeled by HystrixCommand
-	@HystrixCommand(fallbackMethod = "processHystrix_Get")
-	public Dept get(@PathVariable("id") Long id)
-	{
-		System.out.println("111");
-		Dept dept = this.service.get(id);
-		if (null == dept) {
-			throw new RuntimeException("ID-" + id + ":there is no responding result");
-		}
-		return dept;
-	}
-
-	public Dept processHystrix_Get(@PathVariable("id") Long id)
-	{
-		System.out.println("222");
-		Dept result = new Dept();
-		result.setDname("Provider shutdown, there is a limited service");
-		result.setDeptno(id);
-		result.setDb_source("no this database in MySQL");
-		return result;
-	}*/
+	private TravelPlanService service;
 
 	@PostMapping("/travelPlan")
-	public ResponseEntity addPlan(){
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	@ApiOperation(value = "Add a travelPlan", notes = "Add a travelPlan")
+	public AjaxResponse addPlan(@RequestBody TravelPlanModel travelPlan){
+		return AjaxResponse.success(service.addPlan(travelPlan));
 	}
 
-	@GetMapping("/getPlans")
-	public List<TravelPlanModel> getAll(){
-		return service.getAll();
+	@GetMapping("/travelPlan/{name}")
+	@ApiOperation(value = "Get travelPlan by name", notes = "Get travelPlan by name")
+	@Cacheable(value = "travelPlanByName", key = "#name", unless = "#result == null || #result.size() == 0")
+	public List<TravelPlanModel> getByName(@RequestParam("name") String name){
+		return service.getByName(name);
 	}
 
 }
