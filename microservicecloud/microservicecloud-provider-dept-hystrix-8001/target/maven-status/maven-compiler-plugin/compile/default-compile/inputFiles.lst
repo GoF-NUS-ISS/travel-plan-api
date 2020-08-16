@@ -1,4 +1,5 @@
 D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\service\TravelPlanService.java
+D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\config\RedisConfig.java
 D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\controller\TravelPlanController.java
 D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\repository\TravelPlanRepository.java
 D:\Code\ISS\travel-plan-api\microservicecloud\microservicecloud-provider-dept-hystrix-8001\src\main\java\com\gof\springcloud\config\SwaggerConfig.java
