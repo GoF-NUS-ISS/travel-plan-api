@@ -1,4 +1,12 @@
+
 # Compiled class file
+target
+log
+.git
+.settings
+.project
+.springBeans
+.classpath
 *.class
 
 # Log file
