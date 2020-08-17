@@ -21,7 +21,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<junit.version>4.12</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<lombok.version>1.16.18</lombok.version>
+		<lombok.version>1.18.2</lombok.version>
 	</properties>
 
 	<dependencyManagement>
@@ -102,11 +102,11 @@
 	<modules>
 		<module>microservicecloud-api</module>
 		<module>microservicecloud-eureka-7001</module>
-		<module>microservicecloud-eureka-7002</module>
-		<module>microservicecloud-eureka-7003</module>
+		<!--module>microservicecloud-eureka-7002</module>
+		<module>microservicecloud-eureka-7003</module-->
 		<module>microservicecloud-provider-dept-hystrix-8001</module>
-		<module>microservicecloud-provider-dept-8002</module>
-		<module>microservicecloud-provider-dept-8003</module>
+		<!--module>microservicecloud-provider-dept-8002</module>
+		<module>microservicecloud-provider-dept-8003</module-->
 		<module>microservicecloud-consumer-dept-feign</module>
 		<module>microservicecloud-consumer-hystrix-dashboard</module>
 		<module>microservicecloud-zuul-gateway-9527</module>
