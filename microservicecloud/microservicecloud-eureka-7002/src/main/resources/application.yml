@@ -3,11 +3,11 @@ server:
  
 eureka: 
   instance:
-    hostname: eureka7002.com
+    hostname: eureka2
   client: 
     register-with-eureka: false
     fetch-registry: false
     service-url: 
       # cluster declaration
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7003.com:7003/eureka/
+      defaultZone: http://eureka1:7001/eureka/,http://eureka3:7003/eureka/
 
