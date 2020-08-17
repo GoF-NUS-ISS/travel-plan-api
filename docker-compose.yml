@@ -21,7 +21,6 @@ services:
 
   travel-plan-eureka:
     build: ./microservicecloud/microservicecloud-eureka-7001
-<<<<<<< HEAD
     image: eureka1
     container_name: eureka1
     ports:
@@ -33,16 +32,3 @@ services:
     container_name: travel-plan-api
     ports:
       - "8001:8001"
-=======
-    ports:
-      - "7001:7001"
-
-  travel-plan-api:
-    build: ./microservicecloud/microservicecloud-provider-dept-hystrix-8001
-    ports:
-      - "8001:8001"
-    extra_hosts:
-      - "eureka7001.com:192.168.62.113"
-    links:
-     - travel-plan-eureka:eureka7001
->>>>>>> branch 'staging' of https://github.com/GoF-NUS-ISS/travel-plan-api.git
