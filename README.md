@@ -51,7 +51,10 @@ Create 3 MySQL databases on your local machine With same instructions to create 
         Go into the folder "travel-plan-api\microservicecloud", zoom in CMD console, 
         step1：execute command "mvn clean package"
         step2: execute command "docker-compose up -d --build"
- 
+        PS：
+         docker stop $(docker ps -aq) --stop all existing containers
+         docker rm $(docker ps -aq)  --remove all existing containers
+             
  5-Open the API document
    http://localhost:8001/swagger-ui.html#
    localhost can be replaced with other actual IP address.
