@@ -16,18 +16,18 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - ./redis/data:/data
-      - ./redis/logs:/logs
+      - /opt/redis/data:/data
+      - /opt/redis/logs:/logs
 
   travel-plan-eureka:
-    build: ./microservicecloud/microservicecloud-eureka-7001
+    build: ./microservicecloud-eureka-7001
     image: eureka1
     container_name: eureka1
     ports:
       - "7001:7001"
 
   travel-plan-api:
-    build: ./microservicecloud/microservicecloud-provider-dept-hystrix-8001
+    build: ./microservicecloud-provider-dept-hystrix-8001
     image: travel-plan-api
     container_name: travel-plan-api
     ports:
