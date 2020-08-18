@@ -36,7 +36,7 @@ Create 3 MySQL databases on your local machine With same instructions to create 
     a -> b -> d -> e -> f 
     (skip c, which is integrated into specific module)
 
-4-Two ways of starting services:
+4-Three ways of starting services:
 
     1-run on the IDEA
         follow the sequence above, select each SpringBootApplication file, right click and choose "run as spring boot app"
@@ -46,12 +46,17 @@ Create 3 MySQL databases on your local machine With same instructions to create 
         then find the jar file within each target folder of module
         open CMD console, and type "java -jar XXXX" , XXXX refers to the location of each jar
         (without using Tomcat/jetty container, which is already integrated into jar already)
+        
+    3-run in the docker
+        Go into the folder "travel-plan-api\microservicecloud", zoom in CMD console, 
+        step1：execute command "mvn clean package"
+        step2: execute command "docker-compose up -d --build"
  
  5-Open the API document
    http://localhost:8001/swagger-ui.html#
-   localhost can be replaced with other IP address.
+   localhost can be replaced with other actual IP address.
  
- ====================Appendix===========================
+ ====================DEMO Appendix===========================
  
       create database cloudDB01;
       create database cloudDB02;
