@@ -15,13 +15,13 @@ eureka:
  
  
 zuul: 
-  #ignored-services: microservicecloud-dept
-  prefix: /gof
-  ignored-services: "*"
-  routes: 
-    mydept.serviceId: microservicecloud-dept-consumer
-    mydept.path: /mydept/**
- 
+  host:
+    connect-timeout-millis: 60000
+  routes:
+    server-travelPlan:
+      path: /travelPlan/**
+      serviceId: microservicecloud-travel-plan
+
 info:
   app.name: gof-microcloud
   company.name: www.gof.com

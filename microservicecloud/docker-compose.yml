@@ -32,3 +32,10 @@ services:
     container_name: travel-plan-api
     ports:
       - "8001:8001"
+
+  travel-plan-zuul:
+    build: ./microservicecloud-zuul-gateway-9527
+    image: travel-plan-zuul
+    container_name: travel-plan-zuul
+    ports:
+      - "9527:9527"
