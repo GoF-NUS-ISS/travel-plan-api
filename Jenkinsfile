@@ -18,8 +18,27 @@ pipeline{
     stage('Run Docker Compose'){
       steps {
 	sh (script: 'sudo docker rm $(sudo docker ps -a -q)')
-	sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml up')
+	sh (script: 'sudo docker-compose -d -f microservicecloud/docker-compose.yml up')
       }
     }
+
+    stage('Checkout QA FW'){
+      steps {
+	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'dd6eabad-0b21-4f1b-9762-43fba555a0a6', url: 'https://github.com/GoF-NUS-ISS/travel-plan-qa.git']]])
+      }
+    }
+
+    stage('Run API Automated Test'){
+      steps {
+	sh (script: 'mvn -f travel-plan-qa/pom.xml clean test')
+      }
+    }
+
+
+
+
+
+
+
   }
 }
