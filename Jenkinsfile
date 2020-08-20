@@ -2,12 +2,6 @@ pipeline{
     agent any
   
   stages{
-
-     stage('Branch') {
-    	steps{
-           echo "$GIT_BRANCH"
-	}	
-    }
     
     stage('API Maven build'){
       steps {
@@ -31,15 +25,11 @@ pipeline{
       }
     }
 
-    stage('Checkout QA FW'){
-      steps {
-	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'dd6eabad-0b21-4f1b-9762-43fba555a0a6', url: 'https://github.com/GoF-NUS-ISS/travel-plan-qa.git']]])
-      }
-    }
 
     stage('Run API Automated Test'){
       steps {
-	sh (script: 'mvn -f travel-plan-qa/pom.xml clean test')
+       sh (script: 'git clone https://github.com/GoF-NUS-ISS/travel-plan-qa.git')
+       sh (script: 'mvn -f travel-plan-qa/pom.xml clean test')
       }
     }
 
