@@ -11,13 +11,13 @@ pipeline{
     
     stage('API Maven build'){
       steps {
-	sh (script: 'mvn clean install')
+	sh (script: 'mvn -f microservicecloud/pom.xml clean install')
       }
     }
 
     stage('Run Docker Compose'){
       steps {
-	sh (script: 'sudo docker-compose up')
+	sh (script: 'sudo docker-compose -f microservicecloud/pom.xml up')
       }
     }
   }
