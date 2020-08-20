@@ -17,6 +17,8 @@ pipeline{
 
     stage('Run Docker Compose'){
       steps {
+       script{
+
 	try{
 
 	  sh (script: 'sudo docker kill $(sudo docker ps -q)')
@@ -24,6 +26,7 @@ pipeline{
         } catch (err){
 	  echo err.getMessage()
 	}
+        }
 	 sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml -d up')
       }
     }
