@@ -27,7 +27,7 @@ pipeline{
 	  echo err.getMessage()
 	}
         }
-	 sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml -d up')
+	 sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml up -d')
       }
     }
 
