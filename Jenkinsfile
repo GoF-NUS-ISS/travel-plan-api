@@ -18,7 +18,7 @@ pipeline{
     stage('Run Docker Compose'){
       steps {
 	sh (script: 'sudo docker rm $(sudo docker ps -a -q)')
-	sh (script: 'sudo docker-compose -d -f microservicecloud/docker-compose.yml up')
+	sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml -d up')
       }
     }
 
