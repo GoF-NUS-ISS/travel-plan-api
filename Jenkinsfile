@@ -28,7 +28,7 @@ pipeline{
 
     stage('Run API Automated Test'){
       steps {
-       sh (script: 'git clone https://github.com/GoF-NUS-ISS/travel-plan-qa.git')
+       git 'https://github.com/GoF-NUS-ISS/travel-plan-qa.git'
        sh (script: 'mvn -f travel-plan-qa/pom.xml clean test')
       }
     }
