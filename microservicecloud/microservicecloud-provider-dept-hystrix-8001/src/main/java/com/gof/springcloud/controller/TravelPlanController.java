@@ -17,7 +17,6 @@ import com.gof.springcloud.model.TravelPlanModel;
 import com.gof.springcloud.service.TravelPlanService;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -37,7 +36,7 @@ public class TravelPlanController
 
 	@GetMapping("/travelPlan/{name}")
 	@ApiOperation(value = "Get travelPlan by name", notes = "Get travelPlan by name")
-	@ApiImplicitParam(paramType = "name", required = true, name = "name", defaultValue = "tim")
+	//@ApiImplicitParam(paramType = "name", required = true, defaultValue = "tim")
 	@Cacheable(value = "travelPlanByName", key = "#name", unless = "#result == null || #result.size() == 0")
 	public List<TravelPlanModel> getByName(@PathVariable String name){
 		return service.getByName(name);
