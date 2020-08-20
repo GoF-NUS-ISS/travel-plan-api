@@ -8,14 +8,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableCaching
 @EnableEurekaClient //Register into eureka after initiation
 @EnableDiscoveryClient
 @EnableCircuitBreaker //import hystrix for fusing mechanism
-public class TravelPlanProvider8001_Hystrix_App
+@EnableCaching
+public class TravePlanProvider8001_App
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(TravelPlanProvider8001_Hystrix_App.class, args);
+		SpringApplication.run(TravePlanProvider8001_App.class, args);
 	}
 }

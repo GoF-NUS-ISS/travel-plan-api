@@ -15,13 +15,19 @@ eureka:
  
  
 zuul: 
-  host:
-    connect-timeout-millis: 60000
+  ignored-services: "*"
   routes:
-    server-travelPlan:
-      path: /travelPlan/**
+    travelPlan:
       serviceId: microservicecloud-travel-plan
-
+      path: /myPlan/**
+      # http://localhost:9527/myPlan/travelPlan/tim
+      # even including swagger
+      # http://localhost:9527/myPlan/swagger-ui.html#/
+    mydept: 
+      serviceId: microservicecloud-dept
+      path: /mydept/**
+      # http://localhost:9527/mydept/dept/get/2
+ 
 info:
   app.name: gof-microcloud
   company.name: www.gof.com
