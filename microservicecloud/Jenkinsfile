@@ -7,7 +7,7 @@ pipeline{
     agent any
 
     stages{
-    
+
         stage('API Maven build'){
             steps {
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
@@ -43,6 +43,18 @@ pipeline{
                 sh (script: 'sudo docker push gofnusiss/travel-plan-api:latest')
             }
         }
+        stage('Push travel-plan-eureka-api'){
+            steps {
+                sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
+                sh (script: 'sudo docker push gofnusiss/travel-plan-eureka-api:latest')
+            }
+        }
+            stage('Push travel-plan-zuul-api'){
+                steps {
+                    sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
+                    sh (script: 'sudo docker push gofnusiss/travel-plan-zuul-api:latest')
+                }
+            }
 
     }
 }
