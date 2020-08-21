@@ -6,7 +6,7 @@ services:
     command: --smallfiles
     ports:
       - 27017:27017
-   volumes:
+    volumes:
       - /opt/mongodb:/data/db
 
   travel-plan-redis:
@@ -21,8 +21,8 @@ services:
 
   travel-plan-eureka:
     build: ./microservicecloud-eureka-7001
-    image: eureka
-    container_name: eureka
+    image: eureka1
+    container_name: eureka1
     ports:
       - "7001:7001"
 
@@ -33,7 +33,7 @@ services:
     ports:
       - "8001:8001"
 
-  travel-plan-zuul1:
+  travel-plan-zuul:
     build: ./microservicecloud-zuul-gateway-9527
     image: travel-plan-zuul
     container_name: travel-plan-zuul
