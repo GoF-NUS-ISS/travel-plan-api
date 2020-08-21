@@ -6,8 +6,8 @@ services:
     command: --smallfiles
     ports:
       - 27017:27017
-   # volumes:
-   #   - /opt/mongodb:/data/db
+   volumes:
+      - /opt/mongodb:/data/db
 
   travel-plan-redis:
     image: redis:5.0.5
@@ -15,9 +15,9 @@ services:
     command: redis-server
     ports:
       - 6379:6379
-   # volumes:
-   #   - /opt/redis/data:/data
-   #   - /opt/redis/logs:/logs
+    volumes:
+      - /opt/redis/data:/data
+      - /opt/redis/logs:/logs
 
   travel-plan-eureka:
     build: ./microservicecloud-eureka-7001
