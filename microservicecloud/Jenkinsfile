@@ -40,7 +40,7 @@ pipeline{
         stage('Push travel-plan-api'){
             steps {
                 sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
-                sh (script: 'sudo docker push docker push gofnusiss/travel-plan-api:latest')
+                sh (script: 'sudo docker push gofnusiss/travel-plan-api:latest')
             }
         }
 
