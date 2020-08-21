@@ -7,7 +7,7 @@ pipeline{
     agent any
 
     stages{
-
+/*
         stage('API Maven build'){
             steps {
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
@@ -27,7 +27,7 @@ pipeline{
                 sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml up -d')
             }
         }
-
+*/
        /*
         stage('Run API Automated Test'){
             steps {
