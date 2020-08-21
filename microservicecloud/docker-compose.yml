@@ -6,8 +6,8 @@ services:
     command: --smallfiles
     ports:
       - 27017:27017
-    volumes:
-      - /opt/mongodb:/data/db
+   # volumes:
+   #   - /opt/mongodb:/data/db
 
   travel-plan-redis:
     image: redis:5.0.5
@@ -15,25 +15,25 @@ services:
     command: redis-server
     ports:
       - 6379:6379
-    volumes:
-      - /opt/redis/data:/data
-      - /opt/redis/logs:/logs
+   # volumes:
+   #   - /opt/redis/data:/data
+   #   - /opt/redis/logs:/logs
 
   travel-plan-eureka:
     build: ./microservicecloud-eureka-7001
-    image: eureka1
-    container_name: eureka1
+    image: eureka
+    container_name: eureka
     ports:
       - "7001:7001"
 
   travel-plan-api:
     build: ./microservicecloud-provider-dept-hystrix-8001
-    image: travel-plan-api
+    image: gofnusiss/travel-plan-api
     container_name: travel-plan-api
     ports:
       - "8001:8001"
 
-  travel-plan-zuul:
+  travel-plan-zuul1:
     build: ./microservicecloud-zuul-gateway-9527
     image: travel-plan-zuul
     container_name: travel-plan-zuul
