@@ -21,21 +21,21 @@ services:
 
   travel-plan-eureka:
     build: ./microservicecloud-eureka-7001
-    image: eureka1
+    image: gofnusiss/travel-plan-eureka-api
     container_name: eureka1
     ports:
       - "7001:7001"
 
   travel-plan-api:
     build: ./microservicecloud-provider-dept-hystrix-8001
-    image: travel-plan-api
+    image: gofnusiss/travel-plan-api
     container_name: travel-plan-api
     ports:
       - "8001:8001"
 
   travel-plan-zuul:
     build: ./microservicecloud-zuul-gateway-9527
-    image: travel-plan-zuul
+    image: gofnusiss/travel-plan-zuul-api
     container_name: travel-plan-zuul
     ports:
       - "9527:9527"
