@@ -14,20 +14,42 @@ pipeline{
             }
         }
 
-        stage('Run Docker Compose'){
+        stage('Push travel-plan-api'){
             steps {
-                script{
-                    try{
-                        sh (script: 'sudo docker kill $(sudo docker ps -q)')
-                        sh (script: 'sudo docker rm $(sudo docker ps -a -q)')
-                    } catch (err){
-                        echo err.getMessage()
-                    }
-                }
-                sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml up -d')
+                sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
+                sh (script: 'sudo docker push gofnusiss/travel-plan-api:latest')
             }
         }
 
+        stage('Push travel-plan-eureka-api'){
+            steps {
+                sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
+                sh (script: 'sudo docker push gofnusiss/travel-plan-eureka-api:latest')
+            }
+        }
+	    stage('Push travel-plan-zuul-api'){
+	        steps {
+	            sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
+	            sh (script: 'sudo docker push gofnusiss/travel-plan-zuul-api:latest')
+	        }
+	    }
+
+		/*
+	        stage('Run Docker Compose'){
+	            steps {
+	                script{
+	                    try{
+	                        sh (script: 'sudo docker kill $(sudo docker ps -q)')
+	                        sh (script: 'sudo docker rm $(sudo docker ps -a -q)')
+	                    } catch (err){
+	                        echo err.getMessage()
+	                    }
+	                }
+	                sh (script: 'sudo docker-compose -f microservicecloud/docker-compose.yml up -d')
+	            }
+	        }
+		*/
+		
         stage('Trivy Security Scan travel-plan-api'){
             steps {
                 sh(script: 'trivy image gofnusiss/travel-plan-api')
@@ -54,26 +76,6 @@ pipeline{
             }
         }
         */
-
-        stage('Push travel-plan-api'){
-            steps {
-                sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
-                sh (script: 'sudo docker push gofnusiss/travel-plan-api:latest')
-            }
-        }
-
-        stage('Push travel-plan-eureka-api'){
-            steps {
-                sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
-                sh (script: 'sudo docker push gofnusiss/travel-plan-eureka-api:latest')
-            }
-        }
-            stage('Push travel-plan-zuul-api'){
-                steps {
-                    sh (script: 'sudo docker login --username=333743 --password=e501b477-a1dd-4c6b-90d9-3659e9faa965')
-                    sh (script: 'sudo docker push gofnusiss/travel-plan-zuul-api:latest')
-                }
-            }
-
+		
     }
 }
