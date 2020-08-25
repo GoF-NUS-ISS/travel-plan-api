@@ -130,6 +130,30 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+			  <groupId>com.spotify</groupId>
+			  <artifactId>dockerfile-maven-plugin</artifactId>
+			  <version>1.4.13</version>
+			  <executions>
+			    <execution>
+			      <id>default</id>
+			      <goals>
+			        <goal>build</goal>
+			        <goal>push</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			  <configuration>
+			    <repository>gofnusiss/travel-plan-api</repository>
+			    <tag>latest</tag>
+				<username>236924</username>
+				<password>5201314sunshun</password>
+			    <buildArgs>
+			      <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+			    </buildArgs>
+			  </configuration>
+			</plugin>
 		</plugins>
 	</build>
 
