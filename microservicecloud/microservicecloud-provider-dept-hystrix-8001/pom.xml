@@ -122,15 +122,35 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
+			<plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <from>
+                        <image>java:8</image>
+                    </from>
+                    <to>
+                        <image>docker.io/gofnusiss/travel-plan-api:latest</image>
+                        <auth>
+                            <username>236924</username>
+                            <password>5201314sunshun</password>
+                        </auth>
+                    </to>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Xms256mb</jvmFlag>
+                            <jvmFlag>-Xmx512mb</jvmFlag>
+                        </jvmFlags>
+                        <ports>
+                            <port>8001</port>
+                        </ports>
+                    </container>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+            </plugin>
+			<!-- 
 			<plugin>
 			  <groupId>com.spotify</groupId>
 			  <artifactId>dockerfile-maven-plugin</artifactId>
@@ -154,6 +174,7 @@
 			    </buildArgs>
 			  </configuration>
 			</plugin>
+			 -->
 		</plugins>
 	</build>
 
