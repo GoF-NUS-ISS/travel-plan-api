@@ -26,8 +26,7 @@ pipeline{
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
             }
         }
-       sh 'mkdir -p Module1'
-            dir("Module1")
+
         stage('Run API Automated Test'){
             steps {
                 sh 'mkdir -p qa'
