@@ -33,7 +33,7 @@ pipeline{
                 dir("qa"){
                     git 'https://akashdktyagi:f7898852fec02d26702c629e4283ef0a329892ec@github.com/GoF-NUS-ISS/travel-plan-qa.git'
                     sh('ls')
-                    sh (script: 'mvn -f travel-plan-qa/pom.xml clean test')
+                    sh (script: 'mvn -f qa/pom.xml clean test')
                 }
             }
         }
