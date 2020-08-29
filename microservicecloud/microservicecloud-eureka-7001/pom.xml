@@ -10,6 +10,9 @@
 
 	<artifactId>microservicecloud-eureka-7001</artifactId>
 
+    <properties>
+        <version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
+    </properties>
 	<dependencies>
 		<!--eureka-server -->
 		<dependency>
@@ -32,7 +35,33 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+            <!--Added by Akash-plugin: git-commit-id-plugin
+            Using this plugin to get the commit id and that id can be used
+            as tag for our docker images.
+            Used recommendation from this link:
+            https://phauer.com/2016/version-numbers-continuous-delivery-maven-docker/
+            https://dzone.com/articles/maven-git-commit-id-plugin
+            -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dateFormat>yyyyMMdd-HHmmss</dateFormat><!--  human-readable part of the version number -->
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <generateGitPropertiesFile>false</generateGitPropertiesFile><!-- somehow necessary. otherwise the variables are not available in the pom -->
+                    <injectAllReactorProjects>true</injectAllReactorProjects>
+                </configuration>
+
+            </plugin>
 			<plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -41,7 +70,7 @@
                         <image>java:8</image>
                     </from>
                     <to>
-                        <image>docker.io/gofnusiss/travel-plan-eureka-api:latest</image>
+                        <image>docker.io/gofnusiss/travel-plan-eureka-api:${version.number}</image>
                         <auth>
                             <username>236924</username>
                             <password>5201314sunshun</password>
