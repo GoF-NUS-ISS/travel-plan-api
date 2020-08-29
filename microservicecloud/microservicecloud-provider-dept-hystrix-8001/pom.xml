@@ -14,7 +14,7 @@
 	<properties>
 		<git.commit.time/>
 		<git.commit.id.abbrev/>
-		<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
+		<!--<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>-->
 	</properties>
 
 	<dependencies>
@@ -170,7 +170,7 @@
                         <image>java:8</image>
                     </from>
                     <to>
-                        <image>docker.io/gofnusiss/travel-plan-api:${version.number}</image>
+                        <image>docker.io/gofnusiss/travel-plan-api:${git.commit.time}.${git.commit.id.abbrev}</image>
                         <auth>
                             <username>236924</username>
                             <password>5201314sunshun</password>
