@@ -30,15 +30,14 @@ pipeline{
             steps {
                 sh ('''
                 PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.properties
-                PROP_KEY_1=git.commit.time
-                PROP_KEY_2=git.commit.id.abbrev
-                PROP_VALUE_1=`cat $PROPERTY_FILE | grep "$PROP_KEY_1" | cut -d'=' -f2`
-                PROP_VALUE_2=`cat $PROPERTY_FILE | grep "$PROP_KEY_2" | cut -d'=' -f2`
-                build_version=$PROP_VALUE_1.$PROP_VALUE_2
-                echo $build_version
-                export api-tag=$build_version
+   
+                git_commit_time=`cat $PROPERTY_FILE | json select '.git.commit.time'`
+                echo $git_commit_time
+                export api-tag=$git_commit_time
                 sudo docker-compose up -d
                 ''')
+
+
 
             }
         }
@@ -98,3 +97,16 @@ pipeline{
         */
     }
 }
+/*
+                sh ('''
+                PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.properties
+                PROP_KEY_1=git.commit.time
+                PROP_KEY_2=git.commit.id.abbrev
+                PROP_VALUE_1=`cat $PROPERTY_FILE | grep "$PROP_KEY_1" | cut -d'=' -f2`
+                PROP_VALUE_2=`cat $PROPERTY_FILE | grep "$PROP_KEY_2" | cut -d'=' -f2`
+                build_version=$PROP_VALUE_1.$PROP_VALUE_2
+                echo $build_version
+                export api-tag=$build_version
+                sudo docker-compose up -d
+                ''')
+                */
