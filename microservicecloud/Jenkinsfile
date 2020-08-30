@@ -29,8 +29,9 @@ pipeline{
         stage('Run API Docker Compose'){
             steps {
                 sh ('''
-                PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.properties
-   
+                mv microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.properties microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
+                PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
+
                 git_commit_time=`cat $PROPERTY_FILE | json select '.git.commit.time'`
                 echo $git_commit_time
                 export api-tag=$git_commit_time
