@@ -19,13 +19,13 @@ pipeline{
 		        }
 		    }
 		}
-/*
+
         stage('Maven API builds and Publish'){
             steps {
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
             }
         }
-*/
+
         stage('Run API Docker Compose'){
             steps {
                 sh ('''
@@ -34,8 +34,8 @@ pipeline{
 
                 #git_commit_time=`cat $PROPERTY_FILE | json select '."git.commit.time"'`
                 #echo $git_commit_time
-                export api-tag=20200831-011301.e3885f7
-                sudo docker-compose -f microservicecloud/docker-compose.yml up -d
+                #export api_tag=20200831-011301.e3885f7
+                sudo api_tag=20200831-011301.e3885f7 docker-compose -f microservicecloud/docker-compose.yml up -d
                 ''')
 
 
