@@ -35,7 +35,7 @@ pipeline{
                 #git_commit_time=`cat $PROPERTY_FILE | json select '."git.commit.time"'`
                 #echo $git_commit_time
                 #export api-tag=20200831-011301.e3885f7
-                sudo docker-compose up -d
+                sudo docker-compose -f microservicecloud/docker-compose.yml up -d
                 ''')
 
 
