@@ -34,8 +34,8 @@ pipeline{
                 PROP_KEY_2=git.commit.id.abbrev
                 PROP_VALUE_1=`cat $PROPERTY_FILE | grep "$PROP_KEY_1" | cut -d'=' -f2`
                 PROP_VALUE_2=`cat $PROPERTY_FILE | grep "$PROP_KEY_2" | cut -d'=' -f2`
-                env.build_version=$PROP_VALUE_1.$PROP_VALUE_2
-                export api-tag=$env.build_version
+                build_version=$PROP_VALUE_1.$PROP_VALUE_2
+                export api-tag=$build_version
                 sudo docker-compose up -d
                 ''')
 
