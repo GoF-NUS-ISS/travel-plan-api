@@ -24,19 +24,21 @@ pipeline{
         stage('Maven API builds and Publish'){
             steps {
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
-
-                def props = readProperties  file:'git.properties'
-                def Var1= props['git.commit.time']
-                def Var2= props['git.commit.id.abbrev']
-                env.build_version = Var1 + "." + Var2
+                script{
+                    def props = readProperties  file:'git.properties'
+                    def Var1= props['git.commit.time']
+                    def Var2= props['git.commit.id.abbrev']
+                    env.build_version = Var1 + "." + Var2
+                }
+                echo env.build_version
                 echo $env.build_version
             }
         }
 
         stage('Run API Docker Compose'){
             steps {
-            echo $env.build_version
-            echo env.build_version 
+                echo $env.build_version
+                echo env.build_version
                 sh(script: 'export api-tag=$env.build_version')
                 sh(script: 'sudo docker-compose up -d')
             }
