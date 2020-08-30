@@ -29,17 +29,10 @@ pipeline{
         stage('Run API Docker Compose'){
             steps {
                 sh ('''
-                #mv microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.properties microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
-                #PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
-
-                #git_commit_time=`cat $PROPERTY_FILE | json select '."git.commit.time"'`
-                #echo $git_commit_time
-                #export api_tag=20200831-011301.e3885f7
-                sudo api_tag=20200831-011301.e3885f7 docker-compose -f microservicecloud/docker-compose.yml up -d
+                PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/target/version.txt
+                tag=`cat $PROPERTY_FILE`
+                sudo api_tag=$tag docker-compose -f microservicecloud/docker-compose.yml up -d
                 ''')
-
-
-
             }
         }
 
@@ -49,7 +42,7 @@ pipeline{
                 dir("qa"){
                     git 'https://akashdktyagi:f7898852fec02d26702c629e4283ef0a329892ec@github.com/GoF-NUS-ISS/travel-plan-qa.git'
                     sh('ls')
-                    sh (script: 'mvn clean test')
+                    sh (script: 'mvn clean test -Prun-api')
                 }
             }
         }
