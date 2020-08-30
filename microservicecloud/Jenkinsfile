@@ -19,13 +19,13 @@ pipeline{
 		        }
 		    }
 		}
-
+/*
         stage('Maven API builds and Publish'){
             steps {
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
             }
         }
-
+*/
         stage('Run API Docker Compose'){
             steps {
                 sh ('''
