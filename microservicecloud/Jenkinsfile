@@ -30,11 +30,11 @@ pipeline{
             steps {
                 sh ('''
                 #mv microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.properties microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
-                PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
+                #PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/git.json
 
-                git_commit_time=`cat $PROPERTY_FILE | json select '."git.commit.time"'`
-                echo $git_commit_time
-                export api-tag=$git_commit_time
+                #git_commit_time=`cat $PROPERTY_FILE | json select '."git.commit.time"'`
+                #echo $git_commit_time
+                #export api-tag=20200831-011301.e3885f7
                 sudo docker-compose up -d
                 ''')
 
