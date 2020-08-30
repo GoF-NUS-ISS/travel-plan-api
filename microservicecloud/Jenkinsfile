@@ -2,7 +2,6 @@ pipeline{
     environment{
         registry = "gofnusiss/travel-plan"
         registryCredential = "dockerhub_id"
-        build_version = ''
     }
     agent any
 
@@ -36,9 +35,10 @@ pipeline{
                 PROP_VALUE_1=`cat $PROPERTY_FILE | grep "$PROP_KEY_1" | cut -d'=' -f2`
                 PROP_VALUE_2=`cat $PROPERTY_FILE | grep "$PROP_KEY_2" | cut -d'=' -f2`
                 env.build_version=$PROP_VALUE_1.$PROP_VALUE_2
+                export api-tag=$env.build_version
+                sudo docker-compose up -d
                 ''')
-                sh(script: 'export api-tag=$env.build_version')
-                sh(script: 'sudo docker-compose up -d')
+
             }
         }
 
