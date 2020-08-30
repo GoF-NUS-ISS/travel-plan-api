@@ -32,7 +32,7 @@ pipeline{
                 PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/target/version.txt
                 tag=`cat $PROPERTY_FILE`
                 sudo api_tag=$tag docker-compose -f microservicecloud/docker-compose.yml up -d
-                curl http://localhost:8001/
+
                 ''')
             }
         }
