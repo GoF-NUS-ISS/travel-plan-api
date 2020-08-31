@@ -1,6 +1,6 @@
 pipeline{
     environment{
-        registry = "gofnusiss/travel-plan"
+        registry = "https://index.docker.io/v1/"
         registryCredential = "dockerhub_id"
     }
     agent any
@@ -20,12 +20,18 @@ pipeline{
 		    }
 		}
 
+        //This step will create the docker image and push to the registry
+        //However, as of now no integration tests are executed.
+        //Planning to add Unit test which will be executed at maven test phase
         stage('Maven API builds and Publish'){
             steps {
                 sh (script: 'mvn -f microservicecloud/pom.xml clean install')
             }
         }
 
+        //Bringing the Docker containers up
+        //Passing tag before docker-compose is triggered
+        //This tag will then be passes inside docker-compose yml file
         stage('Run API Docker Compose'){
             steps {
                 sh ('''
@@ -37,6 +43,7 @@ pipeline{
             }
         }
 
+        //This will trigger API centeric integration test
         stage('Run API Automated Test'){
             steps {
                 sh 'mkdir -p qa'
@@ -48,22 +55,9 @@ pipeline{
             }
         }
 
-        
         /*
-		stage('Clean Docker Container'){
-		    steps {
-		        script{
-		            try{
-		                sh (script: 'sudo docker kill $(sudo docker ps -q)')
-		                sh (script: 'sudo docker rm $(sudo docker ps -a -q)')
-		            } catch (err){
-		                echo err.getMessage()
-		            }
-		        }
-		    }
-		}
-        */
-		/*
+            Security Vulnerabilty check for Docker containers
+        Need to figure out a way to pass tag from above to this step
         stage('Trivy Security Scan travel-plan-api'){
             steps {
                 sh(script: 'trivy image gofnusiss/travel-plan-api')
@@ -81,15 +75,19 @@ pipeline{
                 sh(script: 'trivy image gofnusiss/travel-plan-zuul-api')
             }
         }
-		*/
-       /*
-        stage('Run API Automated Test'){
+    */
+        stage('Clean Docker Container'){
             steps {
-                git 'https://github.com/GoF-NUS-ISS/travel-plan-qa.git' .....
-                sh (script: 'mvn -f travel-plan-qa/pom.xml clean test')
+                script{
+                    try{
+                        sh (script: 'sudo docker kill $(sudo docker ps -q)')
+                        sh (script: 'sudo docker rm $(sudo docker ps -a -q)')
+                    } catch (err){
+                        echo err.getMessage()
+                    }
+                }
             }
         }
-        */
     }
 }
 /*
