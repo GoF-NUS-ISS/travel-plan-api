@@ -10,7 +10,9 @@
 	</parent>
 
 	<artifactId>microservicecloud-zuul-gateway-9527</artifactId>
-
+	<properties>
+		<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
+	</properties>
 	<dependencies>
 		<!-- zuul router Gateway -->
 		<dependency>
@@ -69,7 +71,61 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            
+			<!--Added by Akash-plugin: git-commit-id-plugin
+			Using this plugin to get the commit id and that id can be used
+			as tag for our docker images.
+			Used recommendation from this link:
+			https://phauer.com/2016/version-numbers-continuous-delivery-maven-docker/
+			https://dzone.com/articles/maven-git-commit-id-plugin
+			-->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>2.2.4</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!--  human-readable part of the version number -->
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>${project.basedir}/git.properties</generateGitPropertiesFilename>
+					<format>json</format>
+					<injectAllReactorProjects>true</injectAllReactorProjects>
+				</configuration>
+			</plugin>
+			<!--Add by Akash: using this plugin to write version number to a text file
+			so that jenkins pipeline can use it-->
+			<plugin>
+				<groupId>ru.yaal.maven</groupId>
+				<artifactId>write-text-files-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<charset>UTF-8</charset>
+					<files>
+						<file>
+							<path>target/version.txt</path>
+							<lines>
+								<line>${version.number}</line>
+							</lines>
+						</file>
+					</files>
+				</configuration>
+				<executions>
+					<execution>
+						<id>write-text-files</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>write-text-files</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -78,7 +134,7 @@
                         <image>java:8</image>
                     </from>
                     <to>
-                        <image>docker.io/gofnusiss/travel-plan-zuul-api:latest</image>
+                        <image>docker.io/gofnusiss/travel-plan-zuul-api:${version.number}</image>
                     </to>
                     <container>
                         <jvmFlags>
