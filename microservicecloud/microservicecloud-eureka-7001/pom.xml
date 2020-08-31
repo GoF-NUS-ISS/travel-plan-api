@@ -99,10 +99,6 @@ so that jenkins pipeline can use it-->
                     </from>
                     <to>
                         <image>docker.io/gofnusiss/travel-plan-eureka-api:${version.number}</image>
-                        <auth>
-                            <username>236924</username>
-                            <password>5201314sunshun</password>
-                        </auth>
                     </to>
                     <container>
                         <jvmFlags>

@@ -135,10 +135,6 @@
                     </from>
                     <to>
                         <image>docker.io/gofnusiss/travel-plan-zuul-api:${version.number}</image>
-                        <auth>
-                            <username>236924</username>
-                            <password>5201314sunshun</password>
-                        </auth>
                     </to>
                     <container>
                         <jvmFlags>
