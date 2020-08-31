@@ -133,10 +133,6 @@
                     </from>
                     <to>
                         <image>docker.io/gofnusiss/travel-plan-api:latest</image>
-                        <auth>
-                            <username>236924</username>
-                            <password>5201314sunshun</password>
-                        </auth>
                     </to>
                     <container>
                         <jvmFlags>
