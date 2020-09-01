@@ -1,43 +1,5 @@
-version: "3"
+version: '2'
 services:
-  travel-plan-mongo:
-    image: mongo:4.0
-    container_name: mongo
-    command: --smallfiles
-    ports:
-      - 27017:27017
-    volumes:
-      - /opt/mongodb:/data/db
-
-  travel-plan-redis:
-    image: redis:5.0.5
-    container_name: redis
-    command: redis-server
-    ports:
-      - 6379:6379
-    volumes:
-      - /opt/redis/data:/data
-      - /opt/redis/logs:/logs
-
-  travel-plan-eureka:
-    image: gofnusiss/travel-plan-eureka-api:${api_tag}
-    container_name: eureka1
-    ports:
-      - "7001:7001"
-
-  travel-plan-api:
-    image: gofnusiss/travel-plan-api:${api_tag}
-    container_name: travel-plan-api
-    ports:
-      - "8001:8001"
-
-  travel-plan-zuul:
-    image: gofnusiss/travel-plan-zuul-api:${api_tag}
-    container_name: travel-plan-zuul
-    ports:
-      - "9527:9527"
-
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
     container_name: elasticsearch
@@ -70,12 +32,13 @@ services:
     hostname: logstash
     command: logstash -f /etc/logstash/conf.d/logstash.conf
     volumes:
-      - ../conf.d:/etc/logstash/conf.d
+      - ./conf.d:/etc/logstash/conf.d
     links:
       - elasticsearch
     depends_on:
       - elasticsearch
     ports:
+      - "7001-7005:7001-7005"
       - "4560:4560"
       - "9600:9600"
       - "5044:5044"
