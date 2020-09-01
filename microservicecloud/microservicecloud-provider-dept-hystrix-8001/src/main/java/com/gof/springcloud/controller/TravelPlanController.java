@@ -2,6 +2,8 @@ package com.gof.springcloud.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,6 +25,8 @@ import io.swagger.annotations.ApiOperation;
 @Api("Travel Plan API")
 public class TravelPlanController
 {
+	private Logger log = LoggerFactory.getLogger(TravelPlanController.class);
+
 	@Autowired
 	private TravelPlanService service;
 	@Autowired
@@ -39,11 +43,13 @@ public class TravelPlanController
 	//@ApiImplicitParam(paramType = "name", required = true, defaultValue = "tim")
 	@Cacheable(value = "travelPlanByName", key = "#name", unless = "#result == null || #result.size() == 0")
 	public List<TravelPlanModel> getByName(@PathVariable String name){
+		log.info("apilogtest: get");
 		return service.getByName(name);
 	}
 
 	@GetMapping("/travelPlan/discovery")
 	public Object discovery() {
+		log.info("apilogtest: discovery");
 		List<String> list = client.getServices();
 		System.out.println("**********" + list);
 		List<ServiceInstance> srvList = client.getInstances("MICROSERVICECLOUD-TRAVEL-PLAN");
