@@ -182,9 +182,9 @@
 					<charset>UTF-8</charset>
 					<files>
 						<file>
-							<path>target/version.txt</path>
+							<path>.././.env</path>
 							<lines>
-								<line>${version.number}</line>
+								<line>api_tag=${version.number}</line>
 							</lines>
 						</file>
 					</files>
