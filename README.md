@@ -49,11 +49,19 @@ Create 3 MySQL databases on your local machine With same instructions to create 
         
     3-run in the docker
         Go into the folder "travel-plan-api\microservicecloud", zoom in CMD console, 
-        step1：execute command "mvn clean package"
-        step2: execute command "docker-compose up -d --build"
+        step1：execute command "mvn clean package" -- generate the images and push them to dockerhub
+        step2: execute command "docker-compose up -d" -- pull the images from dockerhub without build of container
         PS：
          docker stop $(docker ps -aq) --stop all existing containers
          docker rm $(docker ps -aq)  --remove all existing containers
+         
+         the account info in maven setting.xml like:
+         
+           <server>
+               <id>registry-1.docker.io</id>
+               <username> your account </username>
+               <password> password or access token </password>
+           </server>
              
  5-Open the API document
  
