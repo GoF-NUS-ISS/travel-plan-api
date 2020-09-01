@@ -211,8 +211,8 @@
                     </to>
                     <container>
                         <jvmFlags>
-                            <jvmFlag>-Xms256mb</jvmFlag>
-                            <jvmFlag>-Xmx512mb</jvmFlag>
+                            <jvmFlag>-Xms256m</jvmFlag>
+                            <jvmFlag>-Xmx512m</jvmFlag>
                         </jvmFlags>
                         <ports>
                             <port>8001</port>
