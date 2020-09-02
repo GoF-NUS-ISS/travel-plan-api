@@ -25,7 +25,7 @@ pipeline{
         //Planning to add Unit test which will be executed at maven test phase
         stage('Maven API builds and Publish'){
             steps {
-                sh (script: 'mvn -f microservicecloud/pom.xml clean install')
+                sh (script: 'mvn -f microservicecloud/pom.xml clean install -P staging')
             }
         }
 
@@ -37,7 +37,7 @@ pipeline{
                 sh ('''
                 PROPERTY_FILE=microservicecloud/microservicecloud-provider-dept-hystrix-8001/target/version.txt
                 tag=`cat $PROPERTY_FILE`
-                sudo api_tag=$tag docker-compose -f microservicecloud/docker-compose.yml up -d
+                sudo api_tag=$tag docker-compose -f microservicecloud/docker-compose.yml up --build -d
 
                 ''')
             }
