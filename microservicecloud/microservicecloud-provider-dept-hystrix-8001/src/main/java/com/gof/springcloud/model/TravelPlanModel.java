@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+
 @Document
 @Data
 @AllArgsConstructor
@@ -27,5 +29,7 @@ public class TravelPlanModel {
     private String to;
     @ApiModelProperty(value = "travel departure", required = true)
     private String from;
+
+    private ArrayList<TravelPlanModel_Day> days;
 }
 
