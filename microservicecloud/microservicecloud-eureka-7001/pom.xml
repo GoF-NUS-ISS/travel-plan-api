@@ -65,31 +65,7 @@
             </plugin>
             <!--Add by Akash: using this plugin to write version number to a text file
 so that jenkins pipeline can use it-->
-            <plugin>
-                <groupId>ru.yaal.maven</groupId>
-                <artifactId>write-text-files-maven-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <charset>UTF-8</charset>
-                    <files>
-                        <file>
-                            <path>target/version.txt</path>
-                            <lines>
-                                <line>${version.number}</line>
-                            </lines>
-                        </file>
-                    </files>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>write-text-files</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>write-text-files</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
 			<plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -102,8 +78,8 @@ so that jenkins pipeline can use it-->
                     </to>
                     <container>
                         <jvmFlags>
-                            <jvmFlag>-Xms256mb</jvmFlag>
-                            <jvmFlag>-Xmx512mb</jvmFlag>
+                            <jvmFlag>-Xms256m</jvmFlag>
+                            <jvmFlag>-Xmx512m</jvmFlag>
                         </jvmFlags>
                         <ports>
                             <port>7001</port>

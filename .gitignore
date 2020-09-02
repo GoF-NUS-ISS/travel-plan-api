@@ -8,6 +8,7 @@ log
 .springBeans
 .classpath
 *.class
+github.property
 
 # Log file
 *.log
@@ -35,3 +36,4 @@ hs_err_pid*
 
 #Redis
 /redis
+/microservicecloud/
