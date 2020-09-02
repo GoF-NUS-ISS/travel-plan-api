@@ -1,14 +1,12 @@
 package com.gof.springcloud.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "daynode")
 public class TravelPlanModel_DayNode {
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    @ApiModelProperty(value = "type")
     private String type;
 
 }

@@ -30,6 +30,7 @@ public class TravelPlanModel {
     @ApiModelProperty(value = "travel departure", required = true)
     private String from;
 
+    @ApiModelProperty(value = "days")
     private ArrayList<TravelPlanModel_Day> days;
 }
 

@@ -35,6 +35,7 @@ public class TravelPlanController
 	@PostMapping("/travelPlan")
 	@ApiOperation(value = "Add a travelPlan", notes = "Add a travelPlan")
 	public AjaxResponse addPlan(@RequestBody TravelPlanModel travelPlan){
+		log.info("apilogtest: add travel plan {}", travelPlan);
 		return AjaxResponse.success(service.addPlan(travelPlan));
 	}
 
