@@ -20,20 +20,24 @@ services:
       - /opt/redis/logs:/logs
 
   travel-plan-eureka:
-    image: gofnusiss/travel-plan-eureka-api:${api_tag}
+    build: ./microservicecloud-eureka-7001
+    image: eureka1
     container_name: eureka1
     ports:
       - "7001:7001"
-      
+
   travel-plan-api:
-    image: gofnusiss/travel-plan-api:${api_tag}
+    build: ./microservicecloud-provider-dept-hystrix-8001
+    image: travel-plan-api
     container_name: travel-plan-api
     ports:
       - "8001:8001"
+    volumes:
+      - ./log:/log
 
-      
   travel-plan-zuul:
-    image: gofnusiss/travel-plan-zuul-api:${api_tag}
+    build: ./microservicecloud-zuul-gateway-9527
+    image: travel-plan-zuul
     container_name: travel-plan-zuul
     ports:
       - "9527:9527"

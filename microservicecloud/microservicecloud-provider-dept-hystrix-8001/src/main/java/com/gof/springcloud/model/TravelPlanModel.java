@@ -1,5 +1,7 @@
 package com.gof.springcloud.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,12 +22,14 @@ import lombok.NoArgsConstructor;
 public class TravelPlanModel {
 
     @Id
+    @ApiModelProperty(value = "id")
     private String id;
     @ApiModelProperty(value = "user name", required = true)
     private String name;
-    @ApiModelProperty(value = "travel destination", required = true)
-    private String to;
-    @ApiModelProperty(value = "travel departure", required = true)
-    private String from;
+    @ApiModelProperty(value = "title", required = true)
+    private String title;
+
+    @ApiModelProperty(value = "days")
+    private List<TravelPlanModel_Day> days;
 }
 

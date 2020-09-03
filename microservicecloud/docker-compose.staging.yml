@@ -1,0 +1,19 @@
+version: "3"
+services:
+  travel-plan-eureka:
+    image: gofnusiss/travel-plan-eureka-api:${api_tag}
+    container_name: eureka1
+    ports:
+      - "7001:7001"
+
+  travel-plan-api:
+    image: gofnusiss/travel-plan-api:${api_tag}
+    container_name: travel-plan-api
+    ports:
+      - "8001:8001"
+
+  travel-plan-zuul:
+    image: gofnusiss/travel-plan-zuul-api:${api_tag}
+    container_name: travel-plan-zuul
+    ports:
+      - "9527:9527"

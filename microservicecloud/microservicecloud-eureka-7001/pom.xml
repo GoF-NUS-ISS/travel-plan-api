@@ -29,65 +29,78 @@
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 	</dependencies>
+
+    <profiles>
+        <profile>
+            <id>staging</id>
+
+            <build>
+                <plugins>
+                    <!--Added by Akash-plugin: git-commit-id-plugin
+                                Using this plugin to get the commit id and that id can be used
+                                as tag for our docker images.
+                                Used recommendation from this link:
+                                https://phauer.com/2016/version-numbers-continuous-delivery-maven-docker/
+                                https://dzone.com/articles/maven-git-commit-id-plugin
+                                -->
+                    <plugin>
+                        <groupId>pl.project13.maven</groupId>
+                        <artifactId>git-commit-id-plugin</artifactId>
+                        <version>2.2.4</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>revision</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <dateFormat>yyyyMMdd-HHmmss</dateFormat><!--  human-readable part of the version number -->
+                            <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                            <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                            <generateGitPropertiesFilename>${project.basedir}/git.properties</generateGitPropertiesFilename>
+                            <format>json</format>
+                            <injectAllReactorProjects>true</injectAllReactorProjects>
+                        </configuration>
+                    </plugin>
+                    <!--Add by Akash: using this plugin to write version number to a text file
+        so that jenkins pipeline can use it-->
+
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <configuration>
+                            <from>
+                                <image>java:8</image>
+                            </from>
+                            <to>
+                                <image>docker.io/gofnusiss/travel-plan-eureka-api:${version.number}</image>
+                            </to>
+                            <container>
+                                <jvmFlags>
+                                    <jvmFlag>-Xms256m</jvmFlag>
+                                    <jvmFlag>-Xmx512m</jvmFlag>
+                                </jvmFlags>
+                                <ports>
+                                    <port>7001</port>
+                                </ports>
+                            </container>
+                            <allowInsecureRegistries>true</allowInsecureRegistries>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-            <!--Added by Akash-plugin: git-commit-id-plugin
-            Using this plugin to get the commit id and that id can be used
-            as tag for our docker images.
-            Used recommendation from this link:
-            https://phauer.com/2016/version-numbers-continuous-delivery-maven-docker/
-            https://dzone.com/articles/maven-git-commit-id-plugin
-            -->
-            <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <version>2.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>revision</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <dateFormat>yyyyMMdd-HHmmss</dateFormat><!--  human-readable part of the version number -->
-                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>${project.basedir}/git.properties</generateGitPropertiesFilename>
-                    <format>json</format>
-                    <injectAllReactorProjects>true</injectAllReactorProjects>
-                </configuration>
-            </plugin>
-            <!--Add by Akash: using this plugin to write version number to a text file
-so that jenkins pipeline can use it-->
 
-			<plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <configuration>
-                    <from>
-                        <image>java:8</image>
-                    </from>
-                    <to>
-                        <image>docker.io/gofnusiss/travel-plan-eureka-api:${version.number}</image>
-                    </to>
-                    <container>
-                        <jvmFlags>
-                            <jvmFlag>-Xms256m</jvmFlag>
-                            <jvmFlag>-Xmx512m</jvmFlag>
-                        </jvmFlags>
-                        <ports>
-                            <port>7001</port>
-                        </ports>
-                    </container>
-                    <allowInsecureRegistries>true</allowInsecureRegistries>
-                </configuration>
-            </plugin>
 
 			<!-- 
 			<plugin>

@@ -104,6 +104,32 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<profiles>
+		<profile>
+			<id>staging</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>2.5.2</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+									<!-- <goal>dockerBuild</goal> -->
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>microservicecloud</finalName>
 		<resources>
@@ -137,20 +163,7 @@
 					</executions>
 				</plugin>
 
-				<plugin>
-	                <groupId>com.google.cloud.tools</groupId>
-	                <artifactId>jib-maven-plugin</artifactId>
-	                <version>2.5.2</version>
-					<executions>
-					  <execution>
-					    <phase>package</phase>
-					    <goals>
-							<goal>build</goal>
-					       <!-- <goal>dockerBuild</goal> -->
-					    </goals>
-					  </execution>
-					</executions>
-	            </plugin>
+
 		    </plugins>
 		</pluginManagement>
 	</build>
