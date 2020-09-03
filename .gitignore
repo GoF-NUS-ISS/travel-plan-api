@@ -8,6 +8,7 @@ log
 .springBeans
 .classpath
 *.class
+*.env
 github.property
 
 # Log file

@@ -1,5 +1,7 @@
 package com.gof.springcloud.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,8 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 
 @Document
 @Data
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class TravelPlanModel {
 
     @Id
+    @ApiModelProperty(value = "id")
     private String id;
     @ApiModelProperty(value = "user name", required = true)
     private String name;
@@ -31,6 +32,6 @@ public class TravelPlanModel {
     private String from;
 
     @ApiModelProperty(value = "days")
-    private ArrayList<TravelPlanModel_Day> days;
+    private List<TravelPlanModel_Day> days;
 }
 
