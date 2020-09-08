@@ -170,15 +170,15 @@
 
 
 	<modules>
-		<module>microservicecloud-api</module>
+		<!--<module>microservicecloud-api</module>-->
 		<module>microservicecloud-eureka-7001</module>
 		<!--module>microservicecloud-eureka-7002</module>
 		<module>microservicecloud-eureka-7003</module-->
 		<module>microservicecloud-provider-dept-hystrix-8001</module>
 		<!--module>microservicecloud-provider-dept-8002</module>
 		<module>microservicecloud-provider-dept-8003</module-->
-		<module>microservicecloud-consumer-dept-feign</module>
-		<module>microservicecloud-consumer-hystrix-dashboard</module>
+		<!--<module>microservicecloud-consumer-dept-feign</module>-->
+		<!--<module>microservicecloud-consumer-hystrix-dashboard</module>-->
 		<module>microservicecloud-zuul-gateway-9527</module>
 	</modules>
 
