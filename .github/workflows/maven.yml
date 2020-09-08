@@ -22,4 +22,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-       run: mvn -f microservicecloud/pom.xml clean install -P staging
+      run: mvn -f microservicecloud/pom.xml clean install -P staging
