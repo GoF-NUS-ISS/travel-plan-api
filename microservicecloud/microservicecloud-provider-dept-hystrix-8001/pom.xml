@@ -58,12 +58,13 @@
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-boot-starter</artifactId>
 		</dependency>
-
+<!-- commented by Akash. Looks like this api is not needed. Commented this from parent pom as well.
 		<dependency>
 			<groupId>com.gof.springcloud</groupId>
 			<artifactId>microservicecloud-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>	    	
+-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
