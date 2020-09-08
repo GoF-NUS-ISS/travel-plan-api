@@ -1,4 +1,9 @@
 # travel-plan-api
+
+#### Other ReadMe Links:
+* Set Up Docker Swarm: <a href='./README-DockerSwarmSetUp'>Docker Swarm Set Up on AWS</a>
+***
+
 For developing scaffold
 
 NOTE: For microservicecloud-provider-dept-hystrix-8001 project, run 'docker-compse up -d' to bring up mongo instance. It will be accessible by localhost.
