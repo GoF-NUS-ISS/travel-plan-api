@@ -22,4 +22,4 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       #run: mvn -B package --file pom.xml
-      run: mvn -f microservicecloud/pom.xml clean install -P staging -Djib.to.auth.username=333743 -Djib.to.auth.password=adadadd
+      run: mvn -f microservicecloud/pom.xml clean install -P staging -Djib.to.auth.username=333743 -Djib.to.auth.password=Clockwise@86
