@@ -189,7 +189,7 @@
 
 
 	<modules>
-		<!--<module>microservicecloud-api</module>-->
+		<module>microservicecloud-api</module>
 		<module>microservicecloud-eureka-7001</module>
 		<!--module>microservicecloud-eureka-7002</module>
 		<module>microservicecloud-eureka-7003</module-->
