@@ -18,29 +18,6 @@ services:
     volumes:
       - /opt/redis/data:/data
       - /opt/redis/logs:/logs
-
-  travel-plan-eureka:
-    build: ./microservicecloud-eureka-7001
-    image: eureka1
-    container_name: eureka1
-    ports:
-      - "7001:7001"
-
-  travel-plan-api:
-    build: ./microservicecloud-provider-dept-hystrix-8001
-    image: travel-plan-api
-    container_name: travel-plan-api
-    ports:
-      - "8001:8001"
-    volumes:
-      - ./log:/log
-
-  travel-plan-zuul:
-    build: ./microservicecloud-zuul-gateway-9527
-    image: travel-plan-zuul
-    container_name: travel-plan-zuul
-    ports:
-      - "9527:9527"
       
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0

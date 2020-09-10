@@ -136,6 +136,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
+		<!-- pulsar -->
+	    <dependency>
+	        <groupId>org.apache.pulsar</groupId>
+	        <artifactId>pulsar-client</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.pulsar</groupId>
+	        <artifactId>pulsar-client-admin</artifactId>
+	    </dependency>
+		<dependency>
+		    <groupId>com.github.majusko</groupId>
+		    <artifactId>pulsar-java-spring-boot-starter</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
