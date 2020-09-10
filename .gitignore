@@ -37,4 +37,5 @@ hs_err_pid*
 
 #Redis
 /redis
-/microservicecloud/
+
+git.properties
