@@ -58,13 +58,11 @@
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-boot-starter</artifactId>
 		</dependency>
-<!-- commented by Akash. Looks like this api is not needed. Commented this from parent pom as well.
 		<dependency>
 			<groupId>com.gof.springcloud</groupId>
 			<artifactId>microservicecloud-api</artifactId>
 			<version>${project.version}</version>
-		</dependency>	    	
--->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -203,6 +201,7 @@
 					<plugin>
 						<groupId>com.google.cloud.tools</groupId>
 						<artifactId>jib-maven-plugin</artifactId>
+						<version>2.5.2</version>
 						<configuration>
 							<from>
 								<image>java:8</image>
@@ -221,6 +220,14 @@
 							</container>
 							<allowInsecureRegistries>true</allowInsecureRegistries>
 						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

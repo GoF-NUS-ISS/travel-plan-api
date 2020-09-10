@@ -104,6 +104,7 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<!--
 	<profiles>
 		<profile>
 			<id>staging</id>
@@ -118,18 +119,15 @@
 								<phase>package</phase>
 								<goals>
 									<goal>build</goal>
-									<!-- <goal>dockerBuild</goal> -->
 								</goals>
 							</execution>
 						</executions>
 					</plugin>
-
-
 				</plugins>
 			</build>
 		</profile>
 	</profiles>
-
+-->
 	<build>
 		<finalName>microservicecloud</finalName>
 		<resources>
@@ -170,7 +168,7 @@
 
 
 	<modules>
-		<!--<module>microservicecloud-api</module>-->
+		<module>microservicecloud-api</module>
 		<module>microservicecloud-eureka-7001</module>
 		<!--module>microservicecloud-eureka-7002</module>
 		<module>microservicecloud-eureka-7003</module-->
