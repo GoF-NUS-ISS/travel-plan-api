@@ -123,6 +123,7 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<!--
 	<profiles>
 		<profile>
 			<id>staging</id>
@@ -137,18 +138,15 @@
 								<phase>package</phase>
 								<goals>
 									<goal>build</goal>
-									<!-- <goal>dockerBuild</goal> -->
 								</goals>
 							</execution>
 						</executions>
 					</plugin>
-
-
 				</plugins>
 			</build>
 		</profile>
 	</profiles>
-
+-->
 	<build>
 		<finalName>microservicecloud</finalName>
 		<resources>
