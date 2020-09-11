@@ -10,7 +10,7 @@ log
 *.class
 *.env
 github.property
-
+*.iml
 # Log file
 *.log
 
