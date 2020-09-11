@@ -21,4 +21,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -f microservicecloud/pom.xml clean install -Pstaging -Djib.to.auth.username=333743 -Djib.to.auth.password=$DOCKER_HUB_REPO_SECRET_KEY
+      env:
+        docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
+      run: mvn -f microservicecloud/pom.xml clean install -Pstaging -Djib.to.auth.username=333743 -Djib.to.auth.password=$docker_hub_password
