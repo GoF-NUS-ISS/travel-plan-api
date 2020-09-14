@@ -23,4 +23,7 @@ jobs:
     - name: Build with Maven
       env:
         docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
+    - if: github.event_name == 'pull_request' 
+      run: mvn -f microservicecloud/pom.xml clean install -Djib.to.auth.username=333743 -Djib.to.auth.password=$docker_hub_password
+    - if: github.event_name == 'push' 
       run: mvn -f microservicecloud/pom.xml clean install -Pstaging -Djib.to.auth.username=333743 -Djib.to.auth.password=$docker_hub_password
