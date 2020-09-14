@@ -15,9 +15,9 @@ public class StepDefs {
     @Autowired
     Environment environment;
 
-    String port = "8080";//environment.getProperty("local.server.port");
+    String port = "8001";//environment.getProperty("local.server.port");
 
-    String baseUrl = "http://localhost";
+    String baseUrl = "http://localhost:";
     String url_offset_get_by_name = "/travelPlan/{name}/?name=%s";
     String url_offset_get_by_id = "/travelPlan/{id}/?id=%s";
     String url_offset_post = "/travelPlan";
@@ -28,8 +28,10 @@ public class StepDefs {
     ResponseEntity<String> response = null;
 
     @Given("API is up and running")
-    public void api_is_up_and_running() {
+    public void api_is_up_and_running() throws Exception{
         headers = new HttpHeaders();
+
+        //Thread.sleep(1000000000);
 
     }
 
