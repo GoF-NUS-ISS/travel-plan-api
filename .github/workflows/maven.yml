@@ -20,10 +20,14 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Maven
+    - name: Build with Maven for PR
+      if: ${{ github.event_name == 'pull_request' }}
       env:
         docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
-    - if: github.event_name == 'pull_request' 
       run: mvn -f microservicecloud/pom.xml clean install -Djib.to.auth.username=333743 -Djib.to.auth.password=$docker_hub_password
-    - if: github.event_name == 'push' 
+      
+    - name: Build with Maven for PUSH
+      if: ${{ github.event_name == 'push' }}
+      env:
+        docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
       run: mvn -f microservicecloud/pom.xml clean install -Pstaging -Djib.to.auth.username=333743 -Djib.to.auth.password=$docker_hub_password
