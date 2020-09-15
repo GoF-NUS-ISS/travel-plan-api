@@ -36,7 +36,7 @@ Create 3 MySQL databases on your local machine With same instructions to create 
     f-microservice Gateway:
         microservicecloud-zuul-gateway-9527
 
-3-Sequence of starting services:
+3-Sequence of starting services:bbb
 
     a -> b -> d -> e -> f 
     (skip c, which is integrated into specific module)
