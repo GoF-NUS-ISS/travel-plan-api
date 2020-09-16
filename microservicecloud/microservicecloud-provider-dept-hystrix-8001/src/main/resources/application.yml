@@ -12,10 +12,10 @@ logging:
 spring:
    application:
     name: microservicecloud-travel-plan
-   data:
-     mongodb:
-       uri: mongodb://mongo:27017
-       database: travelplan
+   data: 
+    mongodb: 
+      uri: mongodb://mongo:27017
+      database: travelplan
    redis:
       database: 0
       host: redis
@@ -33,7 +33,10 @@ spring:
       initial-size: 5
       max-total: 5
       max-wait-millis: 200
- 
+   elasticsearch: 
+    rest: 
+      uris: elasticsearch:9200
+      
 eureka:
   client: #client register into eureka
     service-url: 
