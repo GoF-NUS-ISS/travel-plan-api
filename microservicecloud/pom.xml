@@ -29,6 +29,9 @@
 		<junit.version>4.12</junit.version>
 		<log4j.version>1.2.17</log4j.version>
 		<lombok.version>1.18.2</lombok.version>
+		  <sonar.projectKey>GoF-NUS-ISS_travel-plan-api</sonar.projectKey>
+		  <sonar.organization>gof-nus-iss</sonar.organization>
+		  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<dependencyManagement>
