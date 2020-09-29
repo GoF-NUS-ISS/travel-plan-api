@@ -1,0 +1,98 @@
+version: "3"
+services:
+  travel-plan-mongo:
+    image: mongo:4.0
+    container_name: mongo
+    command: --smallfiles
+    ports:
+      - 27017:27017
+    volumes:
+      - /opt/mongodb:/data/db
+
+  travel-plan-redis:
+    image: redis:5.0.5
+    container_name: redis
+    command: redis-server
+    ports:
+      - 6379:6379
+    volumes:
+      - /opt/redis/data:/data
+      - /opt/redis/logs:/logs
+
+  travel-plan-eureka:
+    image: gofnusiss/travel-plan-eureka-api:20200915-070032.22db9c7
+    container_name: eureka1
+    ports:
+      - "7001:7001"
+
+  travel-plan-api:
+    image: gofnusiss/travel-plan-api:20200915-070032.22db9c7
+    container_name: travel-plan-api
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./log:/log
+
+  travel-plan-zuul:
+    image: gofnusiss/travel-plan-zuul-api:20200915-070032.22db9c7
+    container_name: travel-plan-zuul
+    ports:
+      - "9527:9527"
+      
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
+    container_name: elasticsearch
+    hostname: elasticsearch
+    environment:
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.0
+    container_name: kibana
+    hostname: kibana
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_URL: http://elasticsearch:9200/
+      ES_JAVA_OPTS: "-Xms1g -Xmx2g"
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.9.0
+    container_name: logstash
+    hostname: logstash
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+      - ../conf.d:/etc/logstash/conf.d
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+    ports:
+      - "4560:4560"
+      - "9600:9600"
+      - "5044:5044"
+
+  standalone:
+    image: apachepulsar/pulsar
+    container_name: pulsar
+    ports:
+      - 8080:8080
+      - 6650:6650
+    environment:
+      - BOOKIE_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
+    volumes:
+      - /opt/pulsar/data:/data
+      - /opt/pulsar/conf:/conf
+    command: >
+      /bin/bash -c
+      "bin/apply-config-from-env.py conf/standalone.conf
+      && bin/pulsar standalone"
