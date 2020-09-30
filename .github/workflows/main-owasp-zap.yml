@@ -1,0 +1,20 @@
+# This is a basic workflow to help you get started with Actions
+
+name: OWASP Base Line
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the staging branch
+on:
+  push:
+    branches: [ staging ]
+  pull_request:
+    branches: [ staging ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:     
+    - name: OWASP ZAP Baseline Scan
+      uses: zaproxy/action-baseline@v0.3.0
+      with:
+        target: "http://google-gruyere.appspot.com/555096497032190971678044205199584756762/"
