@@ -39,3 +39,6 @@ hs_err_pid*
 /redis
 
 git.properties
+
+#Security
+*.key
