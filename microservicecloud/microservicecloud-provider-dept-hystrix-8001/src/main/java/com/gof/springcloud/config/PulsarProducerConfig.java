@@ -12,8 +12,9 @@ public class PulsarProducerConfig {
 
 	@Bean
 	public ProducerFactory producerFactory() {
-		return new ProducerFactory()
-				.addProducer(Topics.STR_SAMPLE, String.class)
-				.addProducer(Topics.PLAN_SAMPLE, TravelPlanModel.class);
+		return new ProducerFactory().addProducer(Topics.STR_SAMPLE, String.class)
+				.addProducer(Topics.PLAN_SAMPLE, TravelPlanModel.class)
+				.addProducer(Topics.PLAN_EVENT_JSON, String.class);
+
 	}
 }

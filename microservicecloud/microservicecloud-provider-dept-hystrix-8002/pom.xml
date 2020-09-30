@@ -9,7 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>microservicecloud-provider-dept-hystrix-8001</artifactId>
+	<artifactId>microservicecloud-provider-dept-hystrix-8002</artifactId>
 
 	<properties>
 		<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
@@ -154,6 +154,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
+        
+		<dependency>
+		    <groupId>org.elasticsearch.client</groupId>
+		    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+        </dependency>
 	</dependencies>
 
 	<profiles>
@@ -226,7 +235,7 @@
 								<image>java:8</image>
 							</from>
 							<to>
-								<image>docker.io/gofnusiss/travel-plan-api:${version.number}</image>
+								<image>docker.io/gofnusiss/travel-plan-elasticsearch:${version.number}</image>
 							</to>
 							<container>
 								<jvmFlags>
@@ -234,7 +243,7 @@
 									<jvmFlag>-Xmx512m</jvmFlag>
 								</jvmFlags>
 								<ports>
-									<port>8001</port>
+									<port>8002</port>
 								</ports>
 							</container>
 							<allowInsecureRegistries>true</allowInsecureRegistries>

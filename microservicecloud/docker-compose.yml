@@ -35,6 +35,15 @@ services:
     volumes:
       - ./log:/log
 
+  travel-plan-elasticsearch:
+    build: ./microservicecloud-provider-dept-hystrix-8002
+    image: travel-plan-elasticsearch
+    container_name: travel-plan-elasticsearch
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./log:/log
+
   travel-plan-zuul:
     build: ./microservicecloud-zuul-gateway-9527
     image: travel-plan-zuul
