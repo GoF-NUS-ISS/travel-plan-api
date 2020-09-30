@@ -1,4 +1,4 @@
-ersion: "3"
+version: "3"
 services:
   travel-plan-mongo:
     image: mongo:4.0
