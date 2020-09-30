@@ -40,12 +40,14 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: mvn -f microservicecloud/pom.xml clean install -Psonar org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
       
     - name: Build with Maven for PUSH
       if: ${{ github.event_name == 'push' }}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         docker_hub_user_name: ${{ secrets.DOCKER_HUB_USER_NAME }}
         docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
       run: mvn -f microservicecloud/pom.xml clean install -Psonar org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pstaging -Djib.to.auth.username=333743 -Djib.to.auth.password=$docker_hub_password
