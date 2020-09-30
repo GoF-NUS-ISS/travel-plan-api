@@ -1,0 +1,10 @@
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: [ "https://elasticsearch:9200" ]
+elasticsearch.username: kibana_system
+elasticsearch.password: nDt5ApTwW7aNLDbOEiWA
+elasticsearch.ssl.certificateAuthorities: ["/usr/share/kibana/config/ca.crt"]
+server.ssl.certificate: "/usr/share/kibana/config/kibana.crt"
+server.ssl.key: "/usr/share/kibana/config/kibana.key"
+server.ssl.enabled: true
+logging.verbose: "false"
