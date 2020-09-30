@@ -10,7 +10,7 @@ log
 *.class
 *.env
 github.property
-
+*.iml
 # Log file
 *.log
 
@@ -42,3 +42,4 @@ git.properties
 
 #Security
 *.key
+

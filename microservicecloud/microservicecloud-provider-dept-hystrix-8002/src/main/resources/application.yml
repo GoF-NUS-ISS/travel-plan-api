@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8002
   
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml
@@ -42,7 +42,7 @@ eureka:
     service-url: 
       defaultZone: http://eureka1:7001/eureka/
   instance:
-    instance-id: microservicecloud-travel-plan8001-hystrix
+    instance-id: microservicecloud-travel-plan8002-hystrix
     prefer-ip-address: true
       
 info:

@@ -12,6 +12,12 @@ services:
     ports:
       - "8001:8001"
 
+  travel-plan-elasticsearch:
+    image: gofnusiss/travel-plan-elasticsearch:${api_tag}
+    container_name: travel-plan-elasticsearch
+    ports:
+      - "8002:8002"
+
   travel-plan-zuul:
     image: gofnusiss/travel-plan-zuul-api:${api_tag}
     container_name: travel-plan-zuul

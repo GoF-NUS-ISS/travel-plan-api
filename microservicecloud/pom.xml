@@ -31,16 +31,47 @@
 		<lombok.version>1.18.2</lombok.version>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<!-- <version>Dalston.SR1</version> -->
-				<version>Hoxton.SR7</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <properties>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+				<sonar.organization>gof-nus-iss</sonar.organization>
+				<sonar.projectKey>GoF-NUS-ISS_travel-plan-api</sonar.projectKey>
+                <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.7.0.1746</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sonar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <!-- <version>Dalston.SR1</version> -->
+                <version>Hoxton.SR7</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
 			<dependency>
 				<groupId>mysql</groupId>
@@ -120,33 +151,25 @@
 		        <version>2.6.1</version>
 		    </dependency>
 
+			<dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+			    <version>2.3.4.RELEASE</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>org.elasticsearch.client</groupId>
+			    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+			    <version>7.9.1</version>
+			</dependency>
+	        <dependency>
+	            <groupId>org.elasticsearch</groupId>
+	            <artifactId>elasticsearch</artifactId>
+	            <version>7.9.1</version>
+	        </dependency>
 		</dependencies>
 	</dependencyManagement>
 
-	<!--
-	<profiles>
-		<profile>
-			<id>staging</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.google.cloud.tools</groupId>
-						<artifactId>jib-maven-plugin</artifactId>
-						<version>2.5.2</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>build</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
--->
 	<build>
 		<finalName>microservicecloud</finalName>
 		<resources>
@@ -179,19 +202,17 @@
 						</execution>
 					</executions>
 				</plugin>
-
-
 		    </plugins>
 		</pluginManagement>
 	</build>
-
-
+    
 	<modules>
 		<module>microservicecloud-api</module>
 		<module>microservicecloud-eureka-7001</module>
 		<!--module>microservicecloud-eureka-7002</module>
 		<module>microservicecloud-eureka-7003</module-->
 		<module>microservicecloud-provider-dept-hystrix-8001</module>
+		<module>microservicecloud-provider-dept-hystrix-8002</module>
 		<!--module>microservicecloud-provider-dept-8002</module>
 		<module>microservicecloud-provider-dept-8003</module-->
 		<!--<module>microservicecloud-consumer-dept-feign</module>-->
