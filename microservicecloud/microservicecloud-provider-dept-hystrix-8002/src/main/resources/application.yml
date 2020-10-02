@@ -12,10 +12,10 @@ logging:
 spring:
    application:
     name: microservicecloud-travel-plan
-   data: 
-    mongodb: 
-      uri: mongodb://mongo:27017
-      database: travelplan
+#   data:
+#    mongodb:
+#      uri: mongodb://mongo:27017
+#      database: travelplan
    redis:
       database: 0
       host: redis
@@ -36,14 +36,16 @@ spring:
    elasticsearch: 
     rest: 
       uris: elasticsearch:9200
+      username: elastic
+      password: gJpLQi7hLQ7VTuLPWWqz
       
-eureka:
-  client: #client register into eureka
-    service-url: 
-      defaultZone: http://eureka1:7001/eureka/
-  instance:
-    instance-id: microservicecloud-travel-plan8002-hystrix
-    prefer-ip-address: true
+#eureka:
+#  client: #client register into eureka
+#    service-url:
+#      defaultZone: http://eureka1:7001/eureka/
+#  instance:
+#    instance-id: microservicecloud-travel-plan8002-hystrix
+#    prefer-ip-address: true
       
 info:
   app.name: gof-microservicecloud

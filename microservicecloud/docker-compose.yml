@@ -18,7 +18,7 @@ services:
     volumes:
       - /opt/redis/data:/data
       - /opt/redis/logs:/logs
-
+#
   travel-plan-eureka:
     build: ./microservicecloud-eureka-7001
     image: eureka1
@@ -43,6 +43,7 @@ services:
       - "8002:8002"
     volumes:
       - ./log:/log
+      - ./bundle-ssl/ca/ca.crt:/usr/share/elasticsearch/config/ca.crt
 
   travel-plan-zuul:
     build: ./microservicecloud-zuul-gateway-9527
