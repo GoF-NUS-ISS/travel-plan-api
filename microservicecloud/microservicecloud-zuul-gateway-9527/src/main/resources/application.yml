@@ -23,6 +23,9 @@ zuul:
       # http://localhost:9527/myPlan/travelPlan/tim
       # even including swagger
       # http://localhost:9527/myPlan/swagger-ui.html#/
+    planSearch:
+      serviceId: microservicecloud-travel-elasticsearch
+      path: /mySearch/**
     mydept: 
       serviceId: microservicecloud-dept
       path: /mydept/**
