@@ -8,10 +8,10 @@ mybatis:
 
 logging:
   file:
-    name: ./log/travel-plan-api.log
+    name: ./log/travel-plan-elasticsearch.log
 spring:
    application:
-    name: microservicecloud-travel-plan
+    name: microservicecloud-travel-elasticsearch
 #   data:
 #    mongodb:
 #      uri: mongodb://mongo:27017
@@ -37,15 +37,15 @@ spring:
     rest: 
       uris: elasticsearch:9200
       username: elastic
-      password: gJpLQi7hLQ7VTuLPWWqz
+      password: GKP9cas5NneoB1dgIDnU
       
-#eureka:
-#  client: #client register into eureka
-#    service-url:
-#      defaultZone: http://eureka1:7001/eureka/
-#  instance:
-#    instance-id: microservicecloud-travel-plan8002-hystrix
-#    prefer-ip-address: true
+eureka:
+  client: #client register into eureka
+    service-url: 
+      defaultZone: http://eureka1:7001/eureka/
+  instance:
+    instance-id: microservicecloud-travel-elasticsearch8002-hystrix
+    prefer-ip-address: true
       
 info:
   app.name: gof-microservicecloud
