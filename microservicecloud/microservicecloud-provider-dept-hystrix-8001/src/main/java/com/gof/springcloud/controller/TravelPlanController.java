@@ -35,16 +35,20 @@ public class TravelPlanController
 	@PostMapping("/travelPlan")
 	@ApiOperation(value = "Add a travelPlan", notes = "Add a travelPlan")
 	public AjaxResponse addPlan(@RequestBody TravelPlanModel travelPlan){
-		log.info("apilogtest: add travel plan {}", travelPlan);
 		return AjaxResponse.success(service.addPlan(travelPlan));
 	}
 
-	@GetMapping("/travelPlan/{name}")
+	@GetMapping("/travelPlan/id/{id}")
+	@ApiOperation(value = "Get travelPlan by id", notes = "Get travelPlan by id")
+	public TravelPlanModel getById(@PathVariable String id){
+		return service.getById(id);
+	}
+
+	@GetMapping("/travelPlan/name/{name}")
 	@ApiOperation(value = "Get travelPlan by name", notes = "Get travelPlan by name")
 	//@ApiImplicitParam(paramType = "name", required = true, defaultValue = "tim")
 	@Cacheable(value = "travelPlanByName", key = "#name", unless = "#result == null || #result.size() == 0")
 	public List<TravelPlanModel> getByName(@PathVariable String name){
-		log.info("apilogtest: get");
 		return service.getByName(name);
 	}
 

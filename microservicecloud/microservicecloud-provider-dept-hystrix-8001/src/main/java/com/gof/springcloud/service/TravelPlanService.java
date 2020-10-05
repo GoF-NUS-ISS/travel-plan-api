@@ -10,5 +10,8 @@ public interface TravelPlanService {
 
 	public List<TravelPlanModel> getAll();
 
+	public TravelPlanModel getById(String id);
+
 	public List<TravelPlanModel> getByName(String name);
+
 }

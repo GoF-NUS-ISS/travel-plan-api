@@ -20,8 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class TravelPlanServiceImpl implements TravelPlanService
-{
+public class TravelPlanServiceImpl implements TravelPlanService {
 	@Autowired
 	private TravelPlanRepository travelPlanRepository;
 	@Autowired
@@ -55,5 +54,10 @@ public class TravelPlanServiceImpl implements TravelPlanService
 	@Override
 	public List<TravelPlanModel> getByName(String name) {
 		return travelPlanRepository.findByName(name);
+	}
+
+	@Override
+	public TravelPlanModel getById(String id) {
+		return travelPlanRepository.findById(id).get();
 	}
 }

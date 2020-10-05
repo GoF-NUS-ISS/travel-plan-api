@@ -13,4 +13,5 @@ public interface TravelPlanRepository extends MongoRepository<TravelPlanModel, S
 
 	@Query("{'name':?0}")
 	List<TravelPlanModel> findByName(String name);
+
 }
