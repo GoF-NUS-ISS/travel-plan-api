@@ -72,9 +72,13 @@ Create 3 MySQL databases on your local machine With same instructions to create 
  
    http://localhost:8001/swagger-ui/index.html#/
    
+   http://localhost:8002/swagger-ui/index.html#/
+   
        localhost can be replaced with other actual IP address.
        
    http://localhost:9527/myPlan/swagger-ui/index.html#/
+   
+   http://localhost:9527/mySearch/swagger-ui/index.html#/
    
        via zuul to transmit
  
