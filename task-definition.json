@@ -3,6 +3,7 @@
         {
           "essential": true,
           "name": "travel-plan-zuul-api",
+          "image": "",
           "portMappings": [
             {
               "containerPort": 9527,
@@ -22,6 +23,7 @@
        { 
           "essential": true,
           "name": "travel-plan-api",
+          "image": "",
           "portMappings": [ 
              { 
                 "containerPort": 8001,
@@ -47,6 +49,7 @@
       {
         "essential": true,
         "name": "travel-plan-eureka-api",
+        "image": "",
         "portMappings": [
           {
             "containerPort": 7001,
