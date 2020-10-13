@@ -94,6 +94,9 @@ jobs:
           service: travel-plan-api-service
           cluster: travel-plan-app-env-prod
           wait-for-service-stability: true
+          
+      - name: Echo task def file
+        run: echo ${{ steps.task-def-final.outputs.task-definition }}
 
 ############################END OF FILE#####################################
 
