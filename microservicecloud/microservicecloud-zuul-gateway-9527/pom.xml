@@ -11,7 +11,8 @@
 
 	<artifactId>microservicecloud-zuul-gateway-9527</artifactId>
 	<properties>
-		<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
+		<!--<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>-->
+		<version.number>${git.commit.id}</version.number>
 	</properties>
 	<dependencies>
 		<!-- zuul router Gateway -->
@@ -71,13 +72,6 @@
 			<id>staging</id>
 			<build>
 				<plugins>
-					<!--Added by Akash-plugin: git-commit-id-plugin
-                                Using this plugin to get the commit id and that id can be used
-                                as tag for our docker images.
-                                Used recommendation from this link:
-                                https://phauer.com/2016/version-numbers-continuous-delivery-maven-docker/
-                                https://dzone.com/articles/maven-git-commit-id-plugin
-                                -->
 					<plugin>
 						<groupId>pl.project13.maven</groupId>
 						<artifactId>git-commit-id-plugin</artifactId>
@@ -99,8 +93,6 @@
 							<injectAllReactorProjects>true</injectAllReactorProjects>
 						</configuration>
 					</plugin>
-					<!--Add by Akash: using this plugin to write version number to a text file
-                    so that jenkins pipeline can use it-->
 
 					<plugin>
 						<groupId>com.google.cloud.tools</groupId>
@@ -145,34 +137,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            
-            
-            <!-- 
-			<plugin>
-			  <groupId>com.spotify</groupId>
-			  <artifactId>dockerfile-maven-plugin</artifactId>
-			  <version>1.4.13</version>
-			  <executions>
-			    <execution>
-			      <id>default</id>
-			      <goals>
-			        <goal>build</goal>
-			        <goal>push</goal>
-			      </goals>
-			    </execution>
-			  </executions>
-			  <configuration>
-			    <repository>gofnusiss/travel-plan-zuul-api</repository>
-			    <tag>latest</tag>
-				<username>236924</username>
-				<password>5201314sunshun</password>
-			    <buildArgs>
-			      <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-			    </buildArgs>
-			  </configuration>
-			</plugin>
-			 -->
 			 
         </plugins>
     </build>
