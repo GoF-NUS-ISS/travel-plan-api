@@ -1,0 +1,191 @@
+{
+    "containerDefinitions": [
+        {
+          "essential": true,
+          "name": "travel-plan-zuul-api",
+          "portMappings": [
+            {
+              "containerPort": 9527,
+              "hostPort": 9527,
+              "protocol": "tcp"
+            }
+          ],
+          "logConfiguration":{
+            "logDriver":"awslogs",
+            "options":{
+              "awslogs-group":"ecs/travel-app-log-grp-main-app",
+              "awslogs-region":"us-east-1",
+              "awslogs-stream-prefix":"zuul"
+            }
+          }
+        },
+       { 
+          "essential": true,
+          "name": "travel-plan-api",
+          "portMappings": [ 
+             { 
+                "containerPort": 8001,
+                "hostPort": 8001,
+                "protocol": "tcp"
+             }
+          ],
+         "mountPoints": [
+           {
+             "containerPath": "/log",
+             "sourceVolume": "efs-volume"
+           }
+         ],
+         "logConfiguration":{
+           "logDriver":"awslogs",
+           "options":{
+             "awslogs-group":"ecs/travel-app-log-grp-main-app",
+             "awslogs-region":"us-east-1",
+             "awslogs-stream-prefix":"travel-plan-api-main"
+           }
+         }
+       },
+      {
+        "essential": true,
+        "name": "travel-plan-eureka-api",
+        "portMappings": [
+          {
+            "containerPort": 7001,
+            "hostPort": 7001,
+            "protocol": "tcp"
+          }
+        ],
+        "logConfiguration":{
+          "logDriver":"awslogs",
+          "options":{
+            "awslogs-group":"ecs/travel-app-log-grp-main-app",
+            "awslogs-region":"us-east-1",
+            "awslogs-stream-prefix":"eureka"
+          }
+        }
+      },
+      {
+        "essential": true,
+        "name": "mongo",
+        "image": "docker.io/mongo:4.0",
+        "portMappings": [
+          {
+            "containerPort": 27017,
+            "hostPort": 27017,
+            "protocol": "tcp"
+          }
+        ],
+        "command": [
+          "--smallfiles"
+        ],
+        "mountPoints": [
+          {
+            "containerPath": "/data/db",
+            "sourceVolume": "efs-volume"
+          }
+        ],
+        "logConfiguration":{
+          "logDriver":"awslogs",
+          "options":{
+            "awslogs-group":"ecs/travel-app-log-grp-main-app",
+            "awslogs-region":"us-east-1",
+            "awslogs-stream-prefix":"mongo"
+          }
+        }
+      },
+      {
+        "command": [
+          "redis-server"
+        ],
+        "essential": true,
+        "image": "docker.io/redis:5.0.5",
+        "mountPoints": [
+          {
+            "containerPath": "/data",
+            "sourceVolume": "efs-volume"
+          },
+          {
+            "containerPath": "/logs",
+            "sourceVolume": "efs-volume"
+          }
+        ],
+        "name": "redis",
+        "portMappings": [
+          {
+            "containerPort": 6379,
+            "hostPort": 6379
+          }
+        ],
+        "logConfiguration":{
+          "logDriver":"awslogs",
+          "options":{
+            "awslogs-group":"ecs/travel-app-log-grp-main-app",
+            "awslogs-region":"us-east-1",
+            "awslogs-stream-prefix":"redis"
+          }
+        }
+      },
+      {
+        "command": [
+          "/bin/bash",
+          "-c",
+          "bin/apply-config-from-env.py conf/standalone.conf && bin/pulsar standalone"
+        ],
+        "environment": [
+          {
+            "name": "BOOKIE_MEM",
+            "value": "\" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g\""
+          }
+        ],
+        "essential": true,
+        "image": "docker.io/apachepulsar/pulsar",
+        "mountPoints": [
+          {
+            "containerPath": "/data",
+            "sourceVolume": "efs-volume"
+          },
+          {
+            "containerPath": "/conf",
+            "sourceVolume": "efs-volume"
+          }
+        ],
+        "name": "pulsar",
+        "portMappings": [
+          {
+            "containerPort": 8080,
+            "hostPort": 8080
+          },
+          {
+            "containerPort": 6650,
+            "hostPort": 6650
+          }
+        ],
+        "logConfiguration":{
+          "logDriver":"awslogs",
+          "options":{
+            "awslogs-group":"ecs/travel-app-log-grp-main-app",
+            "awslogs-region":"us-east-1",
+            "awslogs-stream-prefix":"pulsar"
+          }
+        }
+      }
+
+    ],
+
+    "cpu": "1024",
+    "executionRoleArn": "arn:aws:iam::356567610291:role/ecsTaskExecutionRole",
+    "family": "task-def-travel-plan-api-main",
+    "memory": "4096",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [ 
+        "FARGATE" 
+     ],
+    "volumes": [
+      {
+        "name": "efs-volume",
+        "efsVolumeConfiguration": {
+          "fileSystemId": "fs-c2633f40",
+          "transitEncryption": "ENABLED"
+        }
+      }
+    ]
+ }
