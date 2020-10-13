@@ -78,7 +78,7 @@ jobs:
 
       - name: Fill in the new image ID in the Amazon ECS task definition for Zuul
         if: ${{ github.event_name == 'push' }}
-        id: task-def-3
+        id: task-def-final
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
@@ -90,10 +90,13 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-final.outputs.task-definition }}
           service: travel-plan-api-service
           cluster: travel-plan-app-env-prod
           wait-for-service-stability: true
+          
+      - name: Echo task def file
+        run: echo ${{ steps.task-def-final.outputs.task-definition }}
 
 ############################END OF FILE#####################################
 
