@@ -12,7 +12,8 @@
 	<artifactId>microservicecloud-provider-dept-hystrix-8002</artifactId>
 
 	<properties>
-		<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
+		<!--<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>-->
+		<version.number>${git.commit.id}</version.number>
 	</properties>
 
 	<dependencies>
