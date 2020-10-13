@@ -60,7 +60,7 @@ jobs:
       # It contains info on containers, similar to Docker compose file
       - name: Fill in the new image ID in the Amazon ECS task definition for travel-plan-api
         if: ${{ github.event_name == 'push' }}
-        id: task-def-1
+        id: task-def-travel-plan-api
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
@@ -69,19 +69,19 @@ jobs:
 
       - name: Fill in the new image ID in the Amazon ECS task definition for Eureka
         if: ${{ github.event_name == 'push' }}
-        id: task-def-2
+        id: task-def-eureka
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: task-definition.json
+          task-definition: ${{ steps.task-def-travel-plan-api.outputs.task-definition }}
           container-name: travel-plan-eureka-api
           image: docker.io/gofnusiss/travel-plan-eureka-api:${{ github.sha }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for Zuul
         if: ${{ github.event_name == 'push' }}
-        id: task-def-final
+        id: task-def-zuul
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: task-definition.json
+          task-definition: ${{ steps.task-def-eureka.outputs.task-definition }}
           container-name: travel-plan-zuul-api
           image: docker.io/gofnusiss/travel-plan-zuul-api:${{ github.sha }}
 
@@ -90,7 +90,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def-final.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-zuul.outputs.task-definition }}
           service: travel-plan-api-service
           cluster: travel-plan-app-env-prod
           wait-for-service-stability: true
