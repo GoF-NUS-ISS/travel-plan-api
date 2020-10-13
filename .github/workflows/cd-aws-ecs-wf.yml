@@ -60,7 +60,7 @@ jobs:
       # It contains info on containers, similar to Docker compose file
       - name: Fill in the new image ID in the Amazon ECS task definition for travel-plan-api
         if: ${{ github.event_name == 'push' }}
-        id: task-def
+        id: task-def-1
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
@@ -69,7 +69,7 @@ jobs:
 
       - name: Fill in the new image ID in the Amazon ECS task definition for Eureka
         if: ${{ github.event_name == 'push' }}
-        id: task-def
+        id: task-def-2
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
@@ -78,7 +78,7 @@ jobs:
 
       - name: Fill in the new image ID in the Amazon ECS task definition for Zuul
         if: ${{ github.event_name == 'push' }}
-        id: task-def
+        id: task-def-3
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
