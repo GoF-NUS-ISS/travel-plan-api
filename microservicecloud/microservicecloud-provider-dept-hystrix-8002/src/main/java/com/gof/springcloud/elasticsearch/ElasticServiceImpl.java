@@ -1,12 +1,10 @@
 package com.gof.springcloud.elasticsearch;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.search.join.ScoreMode;
-import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -15,17 +13,22 @@ import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.search.SearchHit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gof.springcloud.model.TravelPlanModel;
 import com.gof.springcloud.model.TravelPlanQueryParam;
 
+import lombok.SneakyThrows;
+
 @Service("elasticService")
 public class ElasticServiceImpl implements IElasticService {
+	@Autowired
+	private ESUtils eSUtils;
+
 	private final static Logger log = LoggerFactory.getLogger(ElasticServiceImpl.class);
 
 	private String IndexName = "travel-plan";
@@ -35,29 +38,27 @@ public class ElasticServiceImpl implements IElasticService {
 		CreateIndexRequest request = new CreateIndexRequest(IndexName);
 		request.settings(Settings.builder().put("index.number_of_shards", 3).put("index.number_of_replicas", 2));
 		request.mapping(MappingBuilder.mappingBuild());
-		return ESUtils.creatIndice(request);
+		return eSUtils.creatIndice(request);
 	}
 
 	@Override
-	public void save(TravelPlanModel plan) {
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			String jsonStr = objectMapper.writeValueAsString(plan);
-			String Id = ESUtils.addData(jsonStr, IndexName, null);
-			log.info("insert successfully and get id{}: {}", Id, jsonStr);
-		} catch (IOException e) {
-			log.error("insert fail error:{}", e);
-		}
+	@SneakyThrows
+	public String save(TravelPlanModel plan) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonStr = objectMapper.writeValueAsString(plan);
+		String Id = eSUtils.addData(jsonStr, IndexName, null);
+		log.info("insert successfully and get id{}: {}", Id, jsonStr);
+		return Id;
 	}
 
 	@Override
-	public void removeById(String id) {
-		ESUtils.deleteById(IndexName, id);
+	public String removeById(String id) {
+		return eSUtils.deleteById(IndexName, id);
 	}
 
 	@Override
 	public void removeAll() {
-		ESUtils.deleteByQuery(IndexName, QueryBuilders.matchAllQuery());
+		eSUtils.deleteByQuery(IndexName, QueryBuilders.matchAllQuery());
 	}
 
 	private QueryBuilder generateQueryBuilder(TravelPlanQueryParam param) {
@@ -99,23 +100,14 @@ public class ElasticServiceImpl implements IElasticService {
 	public List<TravelPlanModel> pageByParam(TravelPlanQueryParam param, int startPage, int pageSize) {
 		List<TravelPlanModel> result = new ArrayList<TravelPlanModel>();
 		QueryBuilder queryBuilder = generateQueryBuilder(param);
-		try {
-			SearchResponse response = ESUtils.searchDataPage(IndexName, startPage, pageSize, queryBuilder);
-			for (SearchHit hit : response.getHits()) {
-				ObjectMapper objectMapper = new ObjectMapper();
-				TravelPlanModel plan = objectMapper.readValue(hit.getSourceAsString(), TravelPlanModel.class);
-				result.add(plan);
-			}
-		} catch (Exception e) {
-			log.error("findAllPlanByPage error:{}", e);
-		}
+		result = eSUtils.searchDataPage(IndexName, startPage, pageSize, queryBuilder, TravelPlanModel.class);
 		return result;
 	}
 
 	@Override
 	public Long countByParam(TravelPlanQueryParam param) {
 		QueryBuilder queryBuilder = generateQueryBuilder(param);
-		return ESUtils.getDataCount(IndexName, queryBuilder);
+		return eSUtils.getDataCount(IndexName, queryBuilder);
 	}
 
 }

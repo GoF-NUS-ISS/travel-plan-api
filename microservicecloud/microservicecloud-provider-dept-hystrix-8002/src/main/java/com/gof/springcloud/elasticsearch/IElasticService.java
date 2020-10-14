@@ -9,9 +9,9 @@ public interface IElasticService {
 
 	public boolean createIndex();
 
-	public void save(TravelPlanModel plan);
+	public String save(TravelPlanModel plan);
 
-	public void removeById(String id);
+	public String removeById(String id);
 
 	public void removeAll();
 
