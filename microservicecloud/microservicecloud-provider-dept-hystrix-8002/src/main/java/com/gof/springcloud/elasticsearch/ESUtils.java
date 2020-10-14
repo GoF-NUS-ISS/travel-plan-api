@@ -1,6 +1,8 @@
 package com.gof.springcloud.elasticsearch;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
@@ -22,11 +24,15 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
@@ -43,7 +49,7 @@ public class ESUtils {
 		client = this.rhlClient;
 	}
 
-	public static Boolean creatIndice(CreateIndexRequest request) {
+	public Boolean creatIndice(CreateIndexRequest request) {
 		CreateIndexResponse createIndexResponse;
 		try {
 			GetIndexRequest request_eixst = new GetIndexRequest(request.index());
@@ -65,9 +71,9 @@ public class ESUtils {
 	 * @param jsonStr insert content in form of json
 	 * @param index
 	 * @param id
-	 * @return
+	 * @return Id
 	 */
-	public static String addData(String jsonStr, String index, String id) {
+	public String addData(String jsonStr, String index, String id) {
 		String Id = null;
 		try {
 			IndexRequest request = new IndexRequest(index).id(id).source(jsonStr, XContentType.JSON);
@@ -84,9 +90,9 @@ public class ESUtils {
 	 * @param jsonStr update content in form of json
 	 * @param index
 	 * @param id
-	 * @return
+	 * @return Id
 	 */
-	public static String updateData(String jsonStr, String index, String id) {
+	public String updateData(String jsonStr, String index, String id) {
 		String Id = null;
 		try {
 			UpdateRequest request = new UpdateRequest(index, id).doc(jsonStr, XContentType.JSON);
@@ -105,7 +111,7 @@ public class ESUtils {
 	 * @param builder
 	 * batch size is 1000 here
 	 */
-	public static void deleteByQuery(String index, QueryBuilder builder) {
+	public void deleteByQuery(String index, QueryBuilder builder) {
 		DeleteByQueryRequest request = new DeleteByQueryRequest(index);
 		request.setQuery(builder);
 		request.setBatchSize(1000);
@@ -119,9 +125,9 @@ public class ESUtils {
 	/**
 	 * @param index
 	 * @param id
-	 * @return
+	 * @return state
 	 */
-	public static String deleteById(String index, String id) {
+	public String deleteById(String index, String id) {
 		String state = null;
 		DeleteRequest request = new DeleteRequest(index, id);
 		try {
@@ -135,16 +141,19 @@ public class ESUtils {
 		return state;
 	}
 
-
 	/**
+	 * @param <T>
 	 * @param index
 	 * @param startPage
 	 * @param pageSize
 	 * @param queryBuilder
+	 * @param type classType
 	 * @return
 	 */
-	public static SearchResponse searchDataPage(String index, int startPage, int pageSize,
-			QueryBuilder queryBuilder) {
+	@SneakyThrows
+	public <T> List<T> searchDataPage(String index, int startPage, int pageSize,
+			QueryBuilder queryBuilder, Class<T> type) {
+		List<T> result = new ArrayList<T>();
 		SearchRequest request = new SearchRequest(index);
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(120, TimeUnit.SECONDS));
@@ -153,12 +162,15 @@ public class ESUtils {
 		sourceBuilder.from((startPage - 1) * pageSize);
 		sourceBuilder.size(pageSize);
 		request.source(sourceBuilder);
-		try {
-			return client.search(request, RequestOptions.DEFAULT);
-		} catch (IOException e) {
-			log.error("index:{} - searchDataPage by condition fail", index);
+		SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+		if (null != response.getHits()) {
+			for (SearchHit hit : response.getHits()) {
+				ObjectMapper objectMapper = new ObjectMapper();
+				T entity = objectMapper.readValue(hit.getSourceAsString(), type);
+				result.add(entity);
+			}
 		}
-		return null;
+		return result;
 	}
 
 	/**
@@ -166,7 +178,7 @@ public class ESUtils {
 	 * @param queryBuilder
 	 * @return
 	 */
-	public static Long getDataCount(String index, QueryBuilder queryBuilder) {
+	public Long getDataCount(String index, QueryBuilder queryBuilder) {
 		SearchRequest request = new SearchRequest(index);
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(120, TimeUnit.SECONDS));

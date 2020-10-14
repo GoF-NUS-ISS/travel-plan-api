@@ -8,8 +8,6 @@ public interface TravelPlanService {
 
 	public TravelPlanModel addPlan(TravelPlanModel travelPlanModel);
 
-	public List<TravelPlanModel> getAll();
-
 	public TravelPlanModel getById(String id);
 
 	public List<TravelPlanModel> getByName(String name);
